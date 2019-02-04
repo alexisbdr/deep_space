@@ -4,3 +4,7 @@
 *.swo
 *.swp
 venv/*
+Packages/*
+Library/*
+Temp/*
+
