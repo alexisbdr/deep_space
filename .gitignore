@@ -9,3 +9,6 @@ Library/*
 Temp/*
 *.sln
 *.csproj
+.vs/*
+obj/*
+ProjectSettings/ProjectVersion.txt
