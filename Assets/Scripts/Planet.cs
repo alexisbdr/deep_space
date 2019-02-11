@@ -12,6 +12,15 @@ public class Planet : MonoBehaviour {
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
 
+    //Planet Data 
+    int Population;
+
+    int PopCapacity;
+
+    int PopIncreaseCost;
+
+    int PlanetName;
+
     //planet data
     int PlanetID;
     float Theta;
