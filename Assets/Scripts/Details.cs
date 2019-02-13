@@ -161,7 +161,7 @@ public class Details : MonoBehaviour {
         ActivePlanetId = id;
         for (int i = 0; i < NumPlanets; i++)
         {
-            GameObject.Find("planet"+i.ToString()).SendMessage("SetSelected")
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
         }
     }
 
@@ -170,10 +170,18 @@ public class Details : MonoBehaviour {
         //Add numplanets to avoid negative remainder
         //In C#, % operator can return negative number
         ActivePlanetId = (NumPlanets+ActivePlanetId - 1) % NumPlanets;
+        for (int i = 0; i < NumPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     void IncrementActivePlanetID()
     {
         ActivePlanetId = (ActivePlanetId + 1)% NumPlanets;
+        for (int i = 0; i < NumPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 }
