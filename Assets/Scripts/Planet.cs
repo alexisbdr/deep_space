@@ -66,7 +66,7 @@ public class Planet : MonoBehaviour {
     {
         PlanetID = id;
         R = (1.5f + id)*0.6f;
-        gameObject.name = planetName; 
+        gameObject.name = "planet" + PlanetID.ToString();
     }
 
     public void SetStartingSprite(bool is_first)

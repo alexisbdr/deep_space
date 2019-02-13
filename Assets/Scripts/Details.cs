@@ -29,22 +29,23 @@ public class Details : MonoBehaviour {
     void Update () {
         if (PlanetDetailsPanelObj.activeSelf)
         {
-            GameObject.Find("PopValue").GetComponent<Text>().text = Math.Floor(Populations[ActivePlanetId]).ToString();
-            GameObject.Find("PlanetNameText").GetComponent<Text>().text = PlanetNames[ActivePlanetId];
-            if (Populations[ActivePlanetId] >= PopIncreaseThreshold) {
-                GameObject.Find("PopCost").GetComponent<Text>().text = "Cost: " + Math.Ceiling(PopIncreaseCosts[ActivePlanetId]).ToString() + " Money";
+            Planet planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
+            GameObject.Find("PopValue").GetComponent<Text>().text = Math.Floor(planet.population).ToString();
+            GameObject.Find("PlanetNameText").GetComponent<Text>().text = planet.planetName;
+            if (planet.population >= planetData.popIncreaseThreshold) {
+                GameObject.Find("PopCost").GetComponent<Text>().text = "Cost: " + Math.Ceiling(planet.popIncreaseCost).ToString() + " Money";
                 GameObject.Find("PopButtonText").GetComponent<Text>().text = "Spawn Clones";
             } else
             {
                 GameObject.Find("PopButtonText").GetComponent<Text>().text = "Colonize";
-                GameObject.Find("PopCost").GetComponent<Text>().text = "Cost: " + Math.Ceiling(ColonizeMoneyCost).ToString() + " Money and " + Math.Ceiling(ColonizePopCost).ToString() + " Population";
+                GameObject.Find("PopCost").GetComponent<Text>().text = "Cost: " + Math.Ceiling(planetData.colonizeMoneyCost).ToString() + " Money and " + Math.Ceiling(ColonizePopCost).ToString() + " Population";
             }
         }
         GameObject.Find("MoneyValue").GetComponent<Text>().text = Math.Floor(money).ToString();
         double popSum = 0;
-        for (int i = 0; i < NumPlanets; i++)
+        foreach (var planet in FindObjectsOfType<Planet>())
         {
-            popSum += Populations[i];
+            popSum += planet.population;
         }
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = Math.Floor(popSum).ToString();
     }
@@ -54,7 +55,7 @@ public class Details : MonoBehaviour {
     {
         //Taxation mechanics
         double TaxSum = 0;
-        foreach(var planet in GameObject.find("Planet"))
+        foreach(var planet in FindObjectsOfType<Planet>())
         {
             TaxSum += planet.population * planet.taxRate;
         }
