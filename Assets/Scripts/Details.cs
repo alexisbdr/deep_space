@@ -159,6 +159,10 @@ public class Details : MonoBehaviour {
     void SetActivePlanetID(int id)
     {
         ActivePlanetId = id;
+        for (int i = 0; i < NumPlanets; i++)
+        {
+            GameObject.Find("planet"+i.ToString()).SendMessage("SetSelected")
+        }
     }
 
     void DecrementActivePlanetID()

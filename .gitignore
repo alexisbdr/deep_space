@@ -12,3 +12,4 @@ Temp/*
 .vs/*
 obj/*
 ProjectSettings/ProjectVersion.txt
+Build/*

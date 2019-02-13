@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Planet : MonoBehaviour {
 
-    public Sprite StartingPlanetSprite;
+    public Sprite InhabitedPlanetSprite;
+    public Sprite InhabitedPlanetSelectedSprite;
     public Sprite UninhabitedPlanetSprite;
+    public Sprite UninhabitedPlanetSelectedSprite;
 
     //GUI elements
     Canvas DetailsCanvas;
@@ -16,6 +18,8 @@ public class Planet : MonoBehaviour {
     int PlanetID;
     float Theta;
     float R=1;
+    bool IsSelected=false;
+    bool IsTerraformed=false;
 
 	// Use this for initialization
 	void Start () {
@@ -53,13 +57,43 @@ public class Planet : MonoBehaviour {
         gameObject.name = "planet" + PlanetID.ToString();
     }
 
+    //Call either SetStarting or SetNonStarting on spawn
     public void SetStarting()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = StartingPlanetSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+        IsTerraformed = true;
+        IsSelected = false;
     }
 
     public void SetNonStarting()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        IsTerraformed = false;
+        IsSelected = false;
+    }
+
+    public void SetSelected(int id)
+    {
+        if (id == PlanetID)
+        {
+            IsSelected = true;
+            if (IsTerraformed)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSelectedSprite;
+            } else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSelectedSprite;
+            }
+        } else
+        {
+            IsSelected = false;
+            if (IsTerraformed)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+            } else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+            }
+        }
     }
 }
