@@ -54,21 +54,12 @@ public class Details : MonoBehaviour {
     {
         //Taxation mechanics
         double TaxSum = 0;
-        for (int i = 0; i < NumPlanets; i++)
+        foreach(var planet in GameObject.find("Planet"))
         {
-            TaxSum += Populations[i] * TaxRates[i];
+            TaxSum += planet.population * planet.taxRate;
         }
         money += Time.fixedDeltaTime * TaxSum;
 
-        //Natural Population Change
-        for (int i = 0; i < NumPlanets; i++)
-        {
-            //Model 1: growing rate of change
-            //Populations[i] += PopGrowthRate * Populations[i] * Time.fixedDeltaTime;
-
-            //Model 2: growth towards capacity - may be negative
-            Populations[i] += PopGrowthRate * Populations[i]*(Math.Log10(Math.Max(1,PopCapacities[i])) - Math.Log10(Math.Max(1, Populations[i]))) * Time.fixedDeltaTime;
-        }
     }
     
     public void AddPopulation()

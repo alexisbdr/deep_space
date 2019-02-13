@@ -23,23 +23,29 @@ public class PlanetSpawner : MonoBehaviour {
     
     public void InitializePlanetDetails(Planet newPlanet, int planetID, bool is_first)
     {
-        newPlanet.AssignID(planetID);
-        newPlanet.setStartingSprite(is_first);
-        planetData detailsClass = new planetData();
+        newPlanet.SetStartingSprite(is_first);
      
         if (is_first)
         {
             newPlanet.planetName = "Gaia";
-            detailsClass = new firstPlanetData() as firstPlanetData;
-            newPlanet.setStarting();
+
+            newPlanet.population = firstPlanetData.startingPopulation;
+            newPlanet.taxRate = firstPlanetData.taxRate;
+            newPlanet.popCapacity = firstPlanetData.populationCapacity;
+            newPlanet.popIncreaseCost = firstPlanetData.popIncreaseCostBase;
+
+        }
+        else
+        {
+            newPlanet.planetName = GeneratePlanetName();
+
+            newPlanet.population = planetData.startingPopulation;
+            newPlanet.taxRate = planetData.taxRate;
+            newPlanet.popCapacity = planetData.populationCapacity;
+            newPlanet.popIncreaseCost = planetData.popIncreaseCostBase;
         }
 
-        newPlanet.planetName = GeneratePlanetName();
-
-        newPlanet.population = detailsClass.startingPopulation;
-        newPlanet.taxRate = detailsClass.taxRate;
-        newPlanet.popCapacity = detailsClass.populationCapacity;
-        newPlanet.popIncreaseCost = detailsClass.popIncreaseCostBase;
+        newPlanet.AssignID(planetID);
 
     }
 

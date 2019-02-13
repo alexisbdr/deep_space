@@ -14,15 +14,16 @@ public class Planet : MonoBehaviour {
     GameObject PlanetDetailsPanelObj;
 
     //Planet Data that varies by planet basis 
-    string planetName;
+    public string planetName;
     int planetID;
     float Theta;
     float R=1;
 
-    double population;
-    double taxRate;
-    double popCapacity;
-    double popIncreaseCost;
+    public double population;
+    public double taxRate;
+    public double popCapacity;
+    public double popIncreaseCost;
+    public double popGrowthRate = planetData.popGrowthRate;
 
     // Use this for initialization
     void Start () {
@@ -43,8 +44,13 @@ public class Planet : MonoBehaviour {
     private void FixedUpdate()
     {
         //simplified astrophysics
-        Theta += Time.fixedDeltaTime / (10*R * R);
+        Theta += Time.fixedDeltaTime / (10 * R * R);
         Theta = Theta % (2 * Mathf.PI);
+
+        //Sigmoid approximation of population growth //Could try to refine this
+        population += popGrowthRate * population *
+                      (Mathf.Log10(Mathf.Max(1, popCapacity)) - Mathf.Log10(Mathf.Max(1, population))) *
+                      Time.fixedDeltaTime;
     }
 
     private void OnMouseDown()
@@ -60,7 +66,7 @@ public class Planet : MonoBehaviour {
     {
         PlanetID = id;
         R = (1.5f + id)*0.6f;
-        gameObject.name = "planet" + PlanetID.ToString();
+        gameObject.name = planetName; 
     }
 
     public void SetStartingSprite(bool is_first)
