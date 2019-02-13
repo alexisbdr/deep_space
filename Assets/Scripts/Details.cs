@@ -93,7 +93,6 @@ public class Details : MonoBehaviour {
         }
     }
 
-    /***
     public void InitializePlanetDetails(int startingPlanet, int nP, long startingPopulation)
     {
         NumPlanets = nP;
@@ -133,7 +132,7 @@ public class Details : MonoBehaviour {
             possibleMiddleConsonants[(int)Math.Floor((double)UnityEngine.Random.Range(0, possibleMiddleConsonants.Length - 0.1f))] +
             possibleVowels[(int)Math.Floor((double)UnityEngine.Random.Range(0, possibleVowels.Length - 0.1f))];
     }
-    ***/
+    
     public void AddPopulation()
     {
         if (Populations[ActivePlanetId] >= PopIncreaseThreshold && money > PopIncreaseCosts[ActivePlanetId])

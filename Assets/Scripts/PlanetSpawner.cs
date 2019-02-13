@@ -9,6 +9,7 @@ public class PlanetSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        int numPlanets = planetData.numPlanets;
         int startingPlanet = (int)Mathf.Floor(Random.Range(0, numPlanets));
         for (int i = 0; i < numPlanets; i++)
         {
@@ -22,10 +23,9 @@ public class PlanetSpawner : MonoBehaviour {
                 newPlanet.SetNonStarting();
             }
         }
-
         GameObject.Find("DetailsCanvas").GetComponent<Details>().InitializePlanetDetails(startingPlanet, numPlanets, startingPopulation);
 	}
-    /***
+   
     public void InitializePlanetDetails(int startingPlanet, int nP, long startingPopulation)
     {
         NumPlanets = nP;
@@ -65,5 +65,5 @@ public class PlanetSpawner : MonoBehaviour {
             possibleMiddleConsonants[(int)Math.Floor((double)UnityEngine.Random.Range(0, possibleMiddleConsonants.Length - 0.1f))] +
             possibleVowels[(int)Math.Floor((double)UnityEngine.Random.Range(0, possibleVowels.Length - 0.1f))];
     }
-    ***/
+   
 }
