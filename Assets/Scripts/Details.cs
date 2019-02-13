@@ -117,6 +117,7 @@ public class Details : MonoBehaviour {
                 PlanetNames[i] = "Gaia";
             }
         }
+        PlanetDetailsPanelObj.transform.Find("CloseButton").gameObject.GetComponent<ClosePlanetDetails>().SetNumPlanets(NumPlanets);
     }
 
     public string GeneratePlanetName()
