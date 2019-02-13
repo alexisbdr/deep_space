@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class PlanetSpawner : MonoBehaviour {
 
@@ -9,47 +11,36 @@ public class PlanetSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        int numPlanets = planetData.numPlanets;
-        int startingPlanet = (int)Mathf.Floor(Random.Range(0, numPlanets));
-        for (int i = 0; i < numPlanets; i++)
-        {
+
+        int numPlanets = generalData.numPlanets;
+        int startingPlanet = (int)Mathf.Floor(UnityEngine.Random.Range(0, numPlanets));
+
+        for (int i = 0; i < numPlanets; i++) {
             Planet newPlanet = GameObject.Instantiate<Planet>(PlanetPrefab);
-            newPlanet.AssignID(i);
-            if (i == startingPlanet)
-            {
-                newPlanet.SetStarting();
-            } else
-            {
-                newPlanet.SetNonStarting();
-            }
+            InitializePlanetDetails(newPlanet, i, i == startingPlanet);
         }
-        GameObject.Find("DetailsCanvas").GetComponent<Details>().InitializePlanetDetails(startingPlanet, numPlanets, startingPopulation);
-	}
-   
-    public void InitializePlanetDetails(int startingPlanet, int nP, long startingPopulation)
+	}   
+    
+    public void InitializePlanetDetails(Planet newPlanet, int planetID, bool is_first)
     {
-        NumPlanets = nP;
-        ActivePlanetId = startingPlanet;
-        Populations = new double[NumPlanets];
-        TaxRates = new double[NumPlanets];
-        PopCapacities = new double[NumPlanets];
-        PopIncreaseCosts = new double[NumPlanets];
-        PlanetNames = new string[NumPlanets];
-        for (int i = 0; i < NumPlanets; i++)
+        newPlanet.AssignID(planetID);
+        newPlanet.setStartingSprite(is_first);
+        planetData detailsClass = new planetData();
+     
+        if (is_first)
         {
-            Populations[i] = 0;
-            PopCapacities[i] = 1000000000;
-            TaxRates[i] = 0;
-            PopIncreaseCosts[i] = PopIncreaseCostBase;
-            PlanetNames[i] = GeneratePlanetName();
-            if (i == startingPlanet)
-            {
-                TaxRates[i] = 0.0001;
-                Populations[i] = startingPopulation;
-                PopCapacities[i] = 6000000000;
-                PlanetNames[i] = "Gaia";
-            }
+            newPlanet.planetName = "Gaia";
+            detailsClass = new firstPlanetData() as firstPlanetData;
+            newPlanet.setStarting();
         }
+
+        newPlanet.planetName = GeneratePlanetName();
+
+        newPlanet.population = detailsClass.startingPopulation;
+        newPlanet.taxRate = detailsClass.taxRate;
+        newPlanet.popCapacity = detailsClass.populationCapacity;
+        newPlanet.popIncreaseCost = detailsClass.popIncreaseCostBase;
+
     }
 
     public string GeneratePlanetName()

@@ -14,10 +14,15 @@ public class Planet : MonoBehaviour {
     GameObject PlanetDetailsPanelObj;
 
     //Planet Data that varies by planet basis 
-    string PlanetName;
-    int PlanetID;
+    string planetName;
+    int planetID;
     float Theta;
     float R=1;
+
+    double population;
+    double taxRate;
+    double popCapacity;
+    double popIncreaseCost;
 
     // Use this for initialization
     void Start () {
@@ -26,6 +31,7 @@ public class Planet : MonoBehaviour {
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
         //Theta
         Theta = Random.value * 2*Mathf.PI;
+        
 	}
 	
 	// Update is called once per frame
@@ -57,13 +63,15 @@ public class Planet : MonoBehaviour {
         gameObject.name = "planet" + PlanetID.ToString();
     }
 
-    public void SetStarting()
+    public void SetStartingSprite(bool is_first)
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = StartingPlanetSprite;
-    }
-
-    public void SetNonStarting()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        if (is_first)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = StartingPlanetSprite;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        }
     }
 }
