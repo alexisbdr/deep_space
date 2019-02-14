@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Planet : MonoBehaviour {
 
+    //Sprites
     public Sprite InhabitedPlanetSprite;
     public Sprite InhabitedPlanetSelectedSprite;
     public Sprite UninhabitedPlanetSprite;
@@ -15,10 +16,18 @@ public class Planet : MonoBehaviour {
     GameObject PlanetDetailsPanelObj;
 
     //planet data
+    //should be unique to each planet
     int PlanetID;
+
+    //planet positioning data
     float Theta;
     float R=1;
+
+    //whether or not this planet appears in planet details
     bool IsSelected=false;
+    
+    //set this to true when population is high enough
+    //dictates whether inhabited or uninhabited sprite is used
     bool IsTerraformed=false;
 
 	// Use this for initialization
@@ -72,6 +81,7 @@ public class Planet : MonoBehaviour {
         IsSelected = false;
     }
 
+    //The planet is selected in the details component
     public void SetSelected(int id)
     {
         if (id == PlanetID)
@@ -95,5 +105,15 @@ public class Planet : MonoBehaviour {
                 gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
             }
         }
+    }
+
+    public float GetR()
+    {
+        return R;
+    }
+
+    public float GetTheta()
+    {
+        return Theta;
     }
 }
