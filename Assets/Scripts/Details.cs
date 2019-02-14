@@ -62,29 +62,6 @@ public class Details : MonoBehaviour {
         money += Time.fixedDeltaTime * TaxSum;
 
     }
-    
-    public void AddPopulation()
-    {
-        if (Populations[ActivePlanetId] >= PopIncreaseThreshold && money > PopIncreaseCosts[ActivePlanetId])
-        {
-            Populations[ActivePlanetId] += PopIncreaseModifier;
-            money -= PopIncreaseCosts[ActivePlanetId];
-            PopIncreaseCosts[ActivePlanetId] *= 1.05;
-        } else if (Populations[ActivePlanetId] < PopIncreaseThreshold && money > ColonizeMoneyCost)
-        {
-            for (int i = 0; i < NumPlanets; i++)
-            {
-                if (i != ActivePlanetId && Populations[i] >= PopIncreaseThreshold && Populations[i] - PopIncreaseThreshold >= ColonizePopCost)
-                {
-                    Populations[i] -= ColonizePopCost;
-                    money -= ColonizeMoneyCost;
-                    Populations[ActivePlanetId] += ColonizePopCost;
-                    ColonizeMoneyCost *= 1.1;
-                    break;
-                }
-            }
-        }
-    }
 
     void SetActivePlanetID(int id)
     {

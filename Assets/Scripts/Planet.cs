@@ -80,4 +80,31 @@ public class Planet : MonoBehaviour {
             gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
         }
     }
+
+    public void AddPopulation()
+    {
+        Debug.Log("I was found");
+        /***
+        if (population >= PopIncreaseThreshold && money > PopIncreaseCosts[ActivePlanetId])
+        {
+            Populations[ActivePlanetId] += PopIncreaseModifier;
+            money -= PopIncreaseCosts[ActivePlanetId];
+            PopIncreaseCosts[ActivePlanetId] *= 1.05;
+        }
+        else if (Populations[ActivePlanetId] < PopIncreaseThreshold && money > ColonizeMoneyCost)
+        {
+            for (int i = 0; i < NumPlanets; i++)
+            {
+                if (i != ActivePlanetId && Populations[i] >= PopIncreaseThreshold && Populations[i] - PopIncreaseThreshold >= ColonizePopCost)
+                {
+                    Populations[i] -= ColonizePopCost;
+                    money -= ColonizeMoneyCost;
+                    Populations[ActivePlanetId] += ColonizePopCost;
+                    ColonizeMoneyCost *= 1.1;
+                    break;
+                }
+            }
+        }
+        ***/
+    }
 }
