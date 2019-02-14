@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 
 public class Planet : MonoBehaviour {
@@ -19,11 +20,18 @@ public class Planet : MonoBehaviour {
     float Theta;
     float R=1;
 
-    public double population;
+    private double _population;
+    public double population
+    {
+        get { return _population; }
+        set { _population = value; }
+    }
+
     public double taxRate;
     public double popCapacity;
     public double popIncreaseCost;
     public double popGrowthRate = planetData.popGrowthRate;
+    public double colonizeMoneyCost = planetData.colonizeMoneyCost;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +39,7 @@ public class Planet : MonoBehaviour {
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
         //Theta
-        Theta = Random.value * 2*Mathf.PI;
+        Theta = UnityEngine.Random.value * 2*Mathf.PI;
         
 	}
 	
@@ -49,7 +57,7 @@ public class Planet : MonoBehaviour {
 
         //Sigmoid approximation of population growth //Could try to refine this
         population += popGrowthRate * population *
-                      (Mathf.Log10(Mathf.Max(1, popCapacity)) - Mathf.Log10(Mathf.Max(1, population))) *
+                      (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
                       Time.fixedDeltaTime;
     }
 
@@ -58,15 +66,15 @@ public class Planet : MonoBehaviour {
         if (!PlanetDetailsPanelObj.activeSelf)
         {
             PlanetDetailsPanelObj.SetActive(true);
-            GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", PlanetID);
+            GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
         }
     }
 
     public void AssignID(int id)
     {
-        PlanetID = id;
+        planetID = id;
         R = (1.5f + id)*0.6f;
-        gameObject.name = "planet" + PlanetID.ToString();
+        gameObject.name = "planet" + planetID.ToString();
     }
 
     public void SetStartingSprite(bool is_first)
@@ -83,28 +91,32 @@ public class Planet : MonoBehaviour {
 
     public void AddPopulation()
     {
-        Debug.Log("I was found");
-        /***
-        if (population >= PopIncreaseThreshold && money > PopIncreaseCosts[ActivePlanetId])
+        Debug.Log("I'm being called");
+        Details gameDetails = GameObject.Find("DetailsCanvas").GetComponent<Details>();
+        int ActivePlanetId = gameDetails.ActivePlanetId;
+        Planet activePlanet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
+        if (population >= planetData.popIncreaseThreshold && gameDetails.money > activePlanet.popIncreaseCost)
         {
-            Populations[ActivePlanetId] += PopIncreaseModifier;
-            money -= PopIncreaseCosts[ActivePlanetId];
-            PopIncreaseCosts[ActivePlanetId] *= 1.05;
+            Debug.Log("Hit 1");
+            activePlanet.population = activePlanet.population + planetData.popIncreaseModifier;
+            gameDetails.money = gameDetails.money - popIncreaseCost; 
+            popIncreaseCost *= planetData.popIncreaseCostScale;
         }
-        else if (Populations[ActivePlanetId] < PopIncreaseThreshold && money > ColonizeMoneyCost)
+        else if (activePlanet.population < planetData.popIncreaseThreshold && gameDetails.money > planetData.colonizeMoneyCost)
         {
-            for (int i = 0; i < NumPlanets; i++)
+            Debug.Log("hit 2");
+            for (int i = 0; i < generalData.numPlanets; i++)
             {
-                if (i != ActivePlanetId && Populations[i] >= PopIncreaseThreshold && Populations[i] - PopIncreaseThreshold >= ColonizePopCost)
+                if (i != ActivePlanetId && population >= planetData.popIncreaseThreshold && population - planetData.popIncreaseThreshold >= planetData.colonizePopCost)
                 {
-                    Populations[i] -= ColonizePopCost;
-                    money -= ColonizeMoneyCost;
-                    Populations[ActivePlanetId] += ColonizePopCost;
-                    ColonizeMoneyCost *= 1.1;
+                    Debug.Log("hit 3");
+                    population -= planetData.colonizePopCost;
+                    gameDetails.money = gameDetails.money - planetData.colonizeMoneyCost;
+                    activePlanet.population = activePlanet.population + planetData.colonizePopCost;
+                    colonizeMoneyCost *= planetData.colonizeMoneyCostScale;
                     break;
                 }
             }
         }
-        ***/
     }
 }

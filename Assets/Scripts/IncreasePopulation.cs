@@ -17,8 +17,7 @@ public class IncreasePopulation : MonoBehaviour {
 
     void OnClickListener()
     {
-        int activeID = Details.ActivePlanetID;
-        GameObject.Find("planet" + activeID.ToString()).GetComponent<Planet>().AddPopulation();
-        //Details.SendMessage("AddPopulation");
+        int ActivePlanetId = Details.GetComponent<Details>().ActivePlanetId;
+        GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>().AddPopulation();
     }
 }

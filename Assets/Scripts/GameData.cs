@@ -42,11 +42,15 @@ public class planetData {
     //money cost for pop gain when population increase button is pushed
     public const double popIncreaseCostBase = 1000;
     //threshold for pop base necessary to press gain pop button
-    public const double popIncreaseThreshold = 100000;
+    public const double popIncreaseThreshold = 100;
     //modifier for pop growth on updates
     public const double popGrowthRate = 0.0003;
     //money cost for colonization of new planet
-    public const double colonizeMoneyCost = 10000;
+    public const double colonizeMoneyCost = 1000;
     //pop cost for colonization of new planet
-    public const double colonizePopCost = 10000;
+    public const double colonizePopCost = 100;
+    //Scale by which popINcreaseCost increases at each colonize
+    public const double popIncreaseCostScale = 1.05;
+    //Scale by which the colonization cost ncreases
+    public const double colonizeMoneyCostScale = 1.1;
 }
