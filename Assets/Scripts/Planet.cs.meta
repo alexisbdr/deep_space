@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a68a86eb5b47a814dbd2bd3ce7275845
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - InhabitedPlanetSprite: {fileID: 21300000, guid: 76aee530427395348aa6cf559026c02b,
+      type: 3}
+  - InhabitedPlanetSelectedSprite: {fileID: 21300000, guid: af1a028f05ad155449dffef25732a0f6,
+      type: 3}
+  - UninhabitedPlanetSprite: {fileID: 21300000, guid: 38beebce9f56db4409270c850c5a558f,
+      type: 3}
+  - UninhabitedPlanetSelectedSprite: {fileID: 21300000, guid: 3b505fe6d87bcc848a36179e3feef7cb,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
