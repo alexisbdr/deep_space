@@ -52,13 +52,11 @@ public class Planet : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!PlanetDetailsPanelObj.activeSelf)
-        {
-            PlanetDetailsPanelObj.SetActive(true);
-            GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", PlanetID);
-        }
+        PlanetDetailsPanelObj.SetActive(true);
+        GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", PlanetID);
+        GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", PlanetID);
     }
-
+    
     public void AssignID(int id)
     {
         PlanetID = id;
@@ -106,7 +104,7 @@ public class Planet : MonoBehaviour {
             }
         }
     }
-
+   
     public float GetR()
     {
         return R;

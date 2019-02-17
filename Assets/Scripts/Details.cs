@@ -36,6 +36,9 @@ public class Details : MonoBehaviour {
     double ColonizeMoneyCost = 10000;
     //pop cost for colonization of new planet
     double ColonizePopCost = 10000;
+    
+    //modifier for pop when clicked
+    double PopClick = 1000;
 
 
 	// Use this for initialization
@@ -184,5 +187,10 @@ public class Details : MonoBehaviour {
         {
             GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
         }
+    }
+
+    public void PlanetClicked(int id)
+    {
+        Populations[id] += PopClick;
     }
 }
