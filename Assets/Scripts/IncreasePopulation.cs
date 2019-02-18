@@ -14,14 +14,10 @@ public class IncreasePopulation : MonoBehaviour {
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
         Details = GameObject.Find("DetailsCanvas");
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnClickListener()
     {
-        Details.SendMessage("AddPopulation");
+        int ActivePlanetId = Details.GetComponent<Details>().ActivePlanetId;
+        GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>().AddPopulation();
     }
 }

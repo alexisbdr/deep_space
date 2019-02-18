@@ -20,6 +20,7 @@
         <e p="Scripts" t="Include">
           <e p="ClosePlanetDetails.cs" t="Include" />
           <e p="Details.cs" t="Include" />
+          <e p="GameData.cs" t="Include" />
           <e p="IncreasePopulation.cs" t="Include" />
           <e p="Planet.cs" t="Include" />
           <e p="PlanetSpawner.cs" t="Include" />
