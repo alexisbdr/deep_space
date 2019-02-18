@@ -7,6 +7,7 @@ public class ClosePlanetDetails : MonoBehaviour {
 
     //GUI elements
     GameObject PlanetDetailsPanelObj;
+    int NumPlanets = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -21,8 +22,18 @@ public class ClosePlanetDetails : MonoBehaviour {
 		
 	}
 
+    public void SetNumPlanets(int np)
+    {
+        NumPlanets = np;
+    }
+
     void OnClickListener()
     {
         PlanetDetailsPanelObj.SetActive(false);
+        for (int i = 0; i < NumPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", -1);
+        }
     }
+
 }

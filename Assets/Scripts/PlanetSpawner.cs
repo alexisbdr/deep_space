@@ -23,10 +23,10 @@ public class PlanetSpawner : MonoBehaviour {
     
     public void InitializePlanetDetails(Planet newPlanet, int planetID, bool is_first)
     {
-        newPlanet.SetStartingSprite(is_first);
      
         if (is_first)
         {
+            newPlanet.SetStarting();
             newPlanet.planetName = "Gaia";
 
             newPlanet.population = firstPlanetData.startingPopulation;
@@ -37,6 +37,7 @@ public class PlanetSpawner : MonoBehaviour {
         }
         else
         {
+            newPlanet.SetNonStarting();
             newPlanet.planetName = GeneratePlanetName();
 
             newPlanet.population = planetData.startingPopulation;

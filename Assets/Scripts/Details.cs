@@ -73,7 +73,6 @@ public class Details : MonoBehaviour
         {
             TaxSum += planet.population * planet.taxRate;
         }
-
         money += Time.fixedDeltaTime * TaxSum;
 
     }
@@ -81,18 +80,35 @@ public class Details : MonoBehaviour
     void SetActivePlanetID(int id)
     {
         ActivePlanetId = id;
+        for (int i = 0; i < generalData.numPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     void DecrementActivePlanetID()
     {
         //Add numplanets to avoid negative remainder
         //In C#, % operator can return negative number
-        ActivePlanetId = (generalData.numPlanets + ActivePlanetId - 1) % generalData.numPlanets;
+        ActivePlanetId = (generalData.numPlanets+ActivePlanetId - 1) % generalData.numPlanets;
+        for (int i = 0; i < generalData.numPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     void IncrementActivePlanetID()
     {
-        ActivePlanetId = (ActivePlanetId + 1) % generalData.numPlanets;
+        ActivePlanetId = (ActivePlanetId + 1)% generalData.numPlanets;
+        for (int i = 0; i < generalData.numPlanets; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
+    }
+
+    public void PlanetClicked(int id)
+    {
+      GameObject.Find("planet" + id.ToString()).GetComponent<Planet>().population += planetData.popClick;
     }
 
 }

@@ -7,18 +7,40 @@ using System;
 
 public class Planet : MonoBehaviour {
 
-    public Sprite StartingPlanetSprite;
+    //Sprites
+    public Sprite InhabitedPlanetSprite;
+    public Sprite InhabitedPlanetSelectedSprite;
     public Sprite UninhabitedPlanetSprite;
+    public Sprite UninhabitedPlanetSelectedSprite;
 
     //GUI elements
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
 
+
+    //whether or not this planet appears in planet details
+    bool IsSelected=false;
+    
+    //set this to true when population is high enough
+    //dictates whether inhabited or uninhabited sprite is used
+    bool IsTerraformed=false;
+
     //Planet Data that varies by planet basis 
     public string planetName;
     int planetID;
-    float Theta;
-    float R=1;
+
+    private float _Theta; 
+    public float Theta
+    {
+      get { return _Theta; }
+        set { _Theta = value; }
+    }
+    private float _R = 1; 
+    public float R
+    {
+      get { return _R; }
+        set { _R = value; }
+    }
 
     private double _population;
     public double population
@@ -49,7 +71,7 @@ public class Planet : MonoBehaviour {
         transform.position = position;
 	}
 
-    private void FixedUpdate()
+  private void FixedUpdate()
     {
         //simplified astrophysics
         Theta += Time.fixedDeltaTime / (10 * R * R);
@@ -63,13 +85,11 @@ public class Planet : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!PlanetDetailsPanelObj.activeSelf)
-        {
-            PlanetDetailsPanelObj.SetActive(true);
-            GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
-        }
+        PlanetDetailsPanelObj.SetActive(true);
+        GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
+        GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
     }
-
+    
     public void AssignID(int id)
     {
         planetID = id;
@@ -77,16 +97,19 @@ public class Planet : MonoBehaviour {
         gameObject.name = "planet" + planetID.ToString();
     }
 
-    public void SetStartingSprite(bool is_first)
+    //Call either SetStarting or SetNonStarting on spawn
+    public void SetStarting()
     {
-        if (is_first)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = StartingPlanetSprite;
-        }
-        else
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
-        }
+        gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+        IsTerraformed = true;
+        IsSelected = false;
+    }
+
+    public void SetNonStarting() 
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        IsTerraformed = false;
+        IsSelected = false;
     }
 
     public void AddPopulation()
@@ -118,6 +141,32 @@ public class Planet : MonoBehaviour {
                     colonizeMoneyCost *= planetData.colonizeMoneyCostScale;
                     break;
                 }
+            }
+        }
+    }
+
+    //The planet is selected in the details component
+    public void SetSelected(int id)
+    {
+        if (id == planetID)
+        {
+            IsSelected = true;
+            if (IsTerraformed)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSelectedSprite;
+            } else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSelectedSprite;
+            }
+        } else
+        {
+            IsSelected = false;
+            if (IsTerraformed)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+            } else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
             }
         }
     }

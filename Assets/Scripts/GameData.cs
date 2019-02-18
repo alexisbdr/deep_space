@@ -36,7 +36,9 @@ public class planetData {
     //Planet Population Constants 
     public const int startingPopulation = 0;
     public const long populationCapacity = 6000000000000;
-
+    
+    //population addition for each planet click
+    public const double popClick = 100;
     //modifier for pop gain when population increase button is added
     public const double popIncreaseModifier = 100000;
     //money cost for pop gain when population increase button is pushed
@@ -53,4 +55,5 @@ public class planetData {
     public const double popIncreaseCostScale = 1.05;
     //Scale by which the colonization cost ncreases
     public const double colonizeMoneyCostScale = 1.1;
+    
 }
