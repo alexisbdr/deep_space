@@ -23,6 +23,7 @@
           <e p="GameData.cs" t="Include" />
           <e p="IncreasePopulation.cs" t="Include" />
           <e p="Planet.cs" t="Include" />
+          <e p="PlanetClickAnimation.cs" t="Include" />
           <e p="PlanetSpawner.cs" t="Include" />
           <e p="SelectLeftPlanet.cs" t="Include" />
           <e p="SelectRightPlatform.cs" t="Include" />

@@ -49,6 +49,12 @@ public class Planet : MonoBehaviour {
         set { _population = value; }
     }
 
+    // text like "+100" that will fly above planet when clicked
+    public GameObject planetClickAnimation;
+    // how much to scale planet when hovered
+    private float scalePlanetHover = 1.4f;
+    private float scalePlanetClick = 1.2f;
+
     public double taxRate;
     public double popCapacity;
     public double popIncreaseCost;
@@ -68,7 +74,7 @@ public class Planet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
-        transform.position = position;
+        transform.parent.position = position;
 	}
 
   private void FixedUpdate()
@@ -83,11 +89,30 @@ public class Planet : MonoBehaviour {
                       Time.fixedDeltaTime;
     }
 
+    private void OnMouseEnter()
+    {
+        gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+    }
+
+    private void OnMouseExit()
+    {
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+    }
+
     private void OnMouseDown()
     {
         PlanetDetailsPanelObj.SetActive(true);
         GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
+        
+        // Logic and Animation for each Planet Click
         GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
+        Instantiate(planetClickAnimation).transform.parent = transform.parent;
+        gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
     }
     
     public void AssignID(int id)

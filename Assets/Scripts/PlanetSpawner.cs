@@ -6,7 +6,7 @@ using System;
 
 public class PlanetSpawner : MonoBehaviour {
 
-    public Planet PlanetPrefab;
+    public GameObject PlanetParent;
 
     // Use this for initialization
     void Start ()
@@ -15,8 +15,10 @@ public class PlanetSpawner : MonoBehaviour {
         int numPlanets = generalData.numPlanets;
         int startingPlanet = (int)Mathf.Floor(UnityEngine.Random.Range(0, numPlanets));
 
-        for (int i = 0; i < numPlanets; i++) {
-            Planet newPlanet = GameObject.Instantiate<Planet>(PlanetPrefab);
+        for (int i = 0; i < numPlanets; i++)
+        {
+            GameObject planetParent = Instantiate(PlanetParent); 
+            Planet newPlanet = planetParent.gameObject.GetComponentsInChildren<Planet>()[0];
             InitializePlanetDetails(newPlanet, i, i == startingPlanet);
         }
 	}   
