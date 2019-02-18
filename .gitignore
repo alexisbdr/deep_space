@@ -10,7 +10,7 @@ Temp/*
 *.sln
 *.csproj
 .vs/*
-*/.vs
+*/.vs/*
 obj/*
 Build/*
 ProjectSettings/ProjectVersion.txt

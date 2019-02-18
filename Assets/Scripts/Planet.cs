@@ -91,28 +91,30 @@ public class Planet : MonoBehaviour {
 
     public void AddPopulation()
     {
-        Debug.Log("I'm being called");
         Details gameDetails = GameObject.Find("DetailsCanvas").GetComponent<Details>();
         int ActivePlanetId = gameDetails.ActivePlanetId;
         Planet activePlanet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
         if (population >= planetData.popIncreaseThreshold && gameDetails.money > activePlanet.popIncreaseCost)
         {
-            Debug.Log("Hit 1");
-            activePlanet.population = activePlanet.population + planetData.popIncreaseModifier;
-            gameDetails.money = gameDetails.money - popIncreaseCost; 
+            activePlanet.population += planetData.popIncreaseModifier;
+            gameDetails.money -= popIncreaseCost; 
             popIncreaseCost *= planetData.popIncreaseCostScale;
         }
         else if (activePlanet.population < planetData.popIncreaseThreshold && gameDetails.money > planetData.colonizeMoneyCost)
         {
-            Debug.Log("hit 2");
             for (int i = 0; i < generalData.numPlanets; i++)
             {
-                if (i != ActivePlanetId && population >= planetData.popIncreaseThreshold && population - planetData.popIncreaseThreshold >= planetData.colonizePopCost)
+                Debug.Log("1");
+                Planet selectedPlanet = GameObject.Find("planet" + i.ToString()).GetComponent<Planet>();
+                selectedPlanet.population -= planetData.colonizePopCost;
+                if (i != ActivePlanetId 
+                    && selectedPlanet.population >= planetData.popIncreaseThreshold 
+                    && (selectedPlanet.population - planetData.popIncreaseThreshold) >= planetData.colonizePopCost)
                 {
-                    Debug.Log("hit 3");
-                    population -= planetData.colonizePopCost;
-                    gameDetails.money = gameDetails.money - planetData.colonizeMoneyCost;
-                    activePlanet.population = activePlanet.population + planetData.colonizePopCost;
+                    Debug.Log("2");
+                    selectedPlanet.population -= planetData.colonizePopCost;
+                    gameDetails.money -= planetData.colonizeMoneyCost;
+                    activePlanet.population += planetData.colonizePopCost;
                     colonizeMoneyCost *= planetData.colonizeMoneyCostScale;
                     break;
                 }

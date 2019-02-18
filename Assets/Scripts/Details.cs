@@ -25,7 +25,6 @@ public class Details : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DetailsCanvas = gameObject.GetComponent<Canvas>();
         PlanetDetailsPanelObj = GameObject.Find("PlanetDetailsPanel");
         PlanetDetailsPanelObj.SetActive(false);
         money = 0;
