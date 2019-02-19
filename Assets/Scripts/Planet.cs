@@ -55,7 +55,9 @@ public class Planet : MonoBehaviour {
     private float scalePlanetHover = 1.4f;
     private float scalePlanetClick = 1.2f;
 
-    public double taxRate;
+    public bool newPlanetSpawned = false;
+    public double newPlanetPopThreshold = planetData.newPlanetPopThreshold;
+    public double productivity;
     public double popCapacity;
     public double popIncreaseCost;
     public double popGrowthRate = planetData.popGrowthRate;

@@ -28,6 +28,7 @@
           <e p="SelectLeftPlanet.cs" t="Include" />
           <e p="SelectRightPlatform.cs" t="Include" />
           <e p="Ship.cs" t="Include" />
+          <e p="SpawnPlanet.cs" t="Include" />
         </e>
       </e>
       <e p="deep_space.sln" t="IncludeFlat" />

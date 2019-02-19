@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\SelectLeftPlanet.cs" />
     <Compile Include="Assets\Scripts\SelectRightPlatform.cs" />
     <Compile Include="Assets\Scripts\Ship.cs" />
+    <Compile Include="Assets\Scripts\SpawnPlanet.cs" />
     <None Include="Assets\Font\Raleway\OFL.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/therapyos/Documents/377/deep_space/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

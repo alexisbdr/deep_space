@@ -7,21 +7,21 @@ using System;
 public class PlanetSpawner : MonoBehaviour {
 
     public GameObject PlanetParent;
-
+    public int numPlanetsSpawned = 0;
+    
     // Use this for initialization
     void Start ()
     {
+        CreateNewPlanet(true);
+    }
 
-        int numPlanets = generalData.numPlanets;
-        int startingPlanet = (int)Mathf.Floor(UnityEngine.Random.Range(0, numPlanets));
-
-        for (int i = 0; i < numPlanets; i++)
-        {
-            GameObject planetParent = Instantiate(PlanetParent); 
-            Planet newPlanet = planetParent.gameObject.GetComponentsInChildren<Planet>()[0];
-            InitializePlanetDetails(newPlanet, i, i == startingPlanet);
-        }
-	}   
+    public void CreateNewPlanet(bool starting = false)
+    {
+        GameObject planetParent = Instantiate(PlanetParent); 
+        Planet newPlanet = planetParent.gameObject.GetComponentsInChildren<Planet>()[0];
+        InitializePlanetDetails(newPlanet, numPlanetsSpawned, starting);
+        numPlanetsSpawned++;
+    }
     
     public void InitializePlanetDetails(Planet newPlanet, int planetID, bool is_first)
     {
@@ -32,7 +32,7 @@ public class PlanetSpawner : MonoBehaviour {
             newPlanet.planetName = "Gaia";
 
             newPlanet.population = firstPlanetData.startingPopulation;
-            newPlanet.taxRate = firstPlanetData.taxRate;
+            newPlanet.productivity = firstPlanetData.productivity;
             newPlanet.popCapacity = firstPlanetData.populationCapacity;
             newPlanet.popIncreaseCost = firstPlanetData.popIncreaseCostBase;
 
@@ -43,7 +43,7 @@ public class PlanetSpawner : MonoBehaviour {
             newPlanet.planetName = GeneratePlanetName();
 
             newPlanet.population = planetData.startingPopulation;
-            newPlanet.taxRate = planetData.taxRate;
+            newPlanet.productivity = planetData.productivity;
             newPlanet.popCapacity = planetData.populationCapacity;
             newPlanet.popIncreaseCost = planetData.popIncreaseCostBase;
         }
