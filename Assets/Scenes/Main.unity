@@ -1654,13 +1654,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1926054617466848, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_Name
-      value: PopDescr
+      value: AutoGrowthDescr
       objectReference: {fileID: 0}
     - target: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_TagString
       value: upgradeButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace, type: 2}
+      propertyPath: m_Name
+      value: AutoGrowthButton
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114459740739659570, guid: 46feae061346d4f2890a4e165871eace, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 46feae061346d4f2890a4e165871eace, type: 2}
   m_IsPrefabAsset: 0
 --- !u!224 &1268647370 stripped
@@ -1759,6 +1764,22 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1315808823}
   m_CullTransparentMesh: 0
+--- !u!1 &1390725128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace,
+    type: 2}
+  m_PrefabInternal: {fileID: 1268647369}
+--- !u!114 &1390725129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1390725128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c4a15cde734bd46b08f7925963b0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1501586226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,7 +1915,7 @@ GameObject:
   - component: {fileID: 1523247038}
   - component: {fileID: 1523247037}
   m_Layer: 5
-  m_Name: PopCost
+  m_Name: AutoGrowthCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
