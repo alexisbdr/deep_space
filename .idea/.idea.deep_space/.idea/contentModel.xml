@@ -21,7 +21,7 @@
           <e p="ClosePlanetDetails.cs" t="Include" />
           <e p="Details.cs" t="Include" />
           <e p="GameData.cs" t="Include" />
-          <e p="IncreasePopulation.cs" t="Include" />
+          <e p="IncreasePopulationGrowth.cs" t="Include" />
           <e p="Planet.cs" t="Include" />
           <e p="PlanetClickAnimation.cs" t="Include" />
           <e p="PlanetSpawner.cs" t="Include" />
