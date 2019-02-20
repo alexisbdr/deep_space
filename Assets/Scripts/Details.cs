@@ -58,7 +58,7 @@ public class Details : MonoBehaviour
             GameObject.Find("SpawnPlanet").transform.Find("PopCost").GetComponent<Text>().text =
                 planet.newPlanetPopThreshold.ToString();
 
-            if (!planet.newPlanetSpawned && planet.population >= planetData.newPlanetPopThreshold)
+            if (planet.population >= planet.newPlanetPopThreshold)
             {
                 var imageButton = GameObject.Find("SpawnPlanet").transform.Find("PopButton").GetComponent<Image>();
                 imageButton.color = _buttonClickableColor;
