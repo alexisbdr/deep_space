@@ -20,7 +20,7 @@ public class SpawnPlanet : MonoBehaviour {
 		int ActivePlanetId = Details.GetComponent<Details>().ActivePlanetId;
 		var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
 		planet.newPlanetSpawned = true;
-		if (planet.population >= planetData.newPlanetPopThreshold)
+		if (planet.population >= planet.newPlanetPopThreshold)
 		{
 			planet.newPlanetPopThreshold *= planetData.newPlanetPopScale;
 			GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().CreateNewPlanet();

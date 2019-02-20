@@ -112,25 +112,32 @@ public class Details : MonoBehaviour
     void SetActivePlanetID(int id)
     {
         ActivePlanetId = id;
-        
-        GameObject.Find("planet" + id.ToString()).SendMessage("SetSelected", ActivePlanetId);
-
+        for (int i = 0; i < GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     void DecrementActivePlanetID()
     {
         //Add numplanets to avoid negative remainder
         //In C#, % operator can return negative number
-        ActivePlanetId = (generalData.numPlanets+ActivePlanetId - 1) % generalData.numPlanets;
-        
-        GameObject.Find("planet" + ActivePlanetId.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        ActivePlanetId = (GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned + ActivePlanetId - 1) % GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned;
+
+        for (int i = 0; i < GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     void IncrementActivePlanetID()
     {
-        ActivePlanetId = (ActivePlanetId + 1)% generalData.numPlanets;
-        
-        GameObject.Find("planet" + ActivePlanetId.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        ActivePlanetId = (ActivePlanetId + 1)% GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned;
+
+        for (int i = 0; i < GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned; i++)
+        {
+            GameObject.Find("planet" + i.ToString()).SendMessage("SetSelected", ActivePlanetId);
+        }
     }
 
     public void PlanetClicked(int id)
