@@ -35,6 +35,9 @@ public class Planet : MonoBehaviour {
         set { _planetID = value; }
     }
 
+    // use for when player hovers over planet and planet should stop moving
+    private bool _planetMoving = true;
+        
     private float _Theta; 
     public float Theta
     {
@@ -88,16 +91,22 @@ public class Planet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
-        transform.parent.position = position;
+	    if (_planetMoving)
+	    {
+	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
+	        transform.parent.position = position;
+	    }
 	}
 
   private void FixedUpdate()
     {
-        //simplified astrophysics
-        Theta += Time.fixedDeltaTime / (10 * R * R);
-        Theta = Theta % (2 * Mathf.PI);
-
+        if (_planetMoving)
+        {
+            //simplified astrophysics
+            Theta += Time.fixedDeltaTime / (10 * R * R);
+            Theta = Theta % (2 * Mathf.PI);
+        }
+        
         //Sigmoid approximation of population growth //Could try to refine this
         population += popGrowthRate * population *
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
@@ -108,11 +117,13 @@ public class Planet : MonoBehaviour {
     private void OnMouseEnter()
     {
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        _planetMoving = false;
     }
 
     private void OnMouseExit()
     {
         gameObject.transform.localScale = new Vector3(1, 1, 1);
+        _planetMoving = true;
     }
 
     private void OnMouseUpAsButton()
