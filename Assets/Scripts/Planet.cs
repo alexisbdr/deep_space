@@ -27,7 +27,13 @@ public class Planet : MonoBehaviour {
 
     //Planet Data that varies by planet basis 
     public string planetName;
-    int planetID;
+
+    private int _planetID;
+    public int planetID
+    {
+        get { return _planetID; }
+        set { _planetID = value; }
+    }
 
     private float _Theta; 
     public float Theta
@@ -56,21 +62,28 @@ public class Planet : MonoBehaviour {
     private float scalePlanetClick = 1.2f;
 
     public bool newPlanetSpawned = false;
-    public double newPlanetPopThreshold = planetData.newPlanetPopThreshold;
+    public double newPlanetPopThreshold;
     public double productivity;
     public double popCapacity;
     public double popIncreaseCost;
-    public double popGrowthRate = planetData.popGrowthRate;
-    public double colonizeMoneyCost = planetData.colonizeMoneyCost;
+    public double popGrowthRate;
+    public double colonizeMoneyCost;
+    public double fixedPopGrowth;
+    public double autoGrowthCost;
 
     // Use this for initialization
     void Start () {
+        newPlanetPopThreshold = planetData.newPlanetPopThreshold;
+        popGrowthRate = planetData.popGrowthRate;
+        colonizeMoneyCost = planetData.colonizeMoneyCost;
+        autoGrowthCost = planetData.popAutoGrowthCostBase;
+
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
         //Theta
         Theta = UnityEngine.Random.value * 2*Mathf.PI;
-        
+        fixedPopGrowth = 0;
 	}
 	
 	// Update is called once per frame
@@ -88,7 +101,8 @@ public class Planet : MonoBehaviour {
         //Sigmoid approximation of population growth //Could try to refine this
         population += popGrowthRate * population *
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
-                      Time.fixedDeltaTime;
+                      Time.fixedDeltaTime +
+                      fixedPopGrowth * Time.deltaTime;
     }
 
     private void OnMouseEnter()
@@ -170,6 +184,12 @@ public class Planet : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void AddPopulationGrowth()
+    {
+        fixedPopGrowth += 1;
+        autoGrowthCost *= planetData.popAutoGrowthCostScale;
     }
 
     //The planet is selected in the details component

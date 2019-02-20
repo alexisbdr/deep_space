@@ -70,8 +70,8 @@ public class Details : MonoBehaviour
                 imageButton.color = _buttonNotClickableColor;
                 imageButton.sprite = null;
             }
-            
-            
+
+            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = Math.Ceiling(planet.autoGrowthCost).ToString();
         }
         
            
@@ -85,8 +85,13 @@ public class Details : MonoBehaviour
             globalProductivityRate += planet.population * planet.productivity;
         }
         money += Time.deltaTime * globalProductivityRate;
-
-        GameObject.Find("MoneyValue").GetComponent<Text>().text = Math.Floor(money).ToString();
+        if (globalProductivityRate < 1)
+        {
+            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money * 100) / 100).ToString();
+        } else
+        {
+            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money)).ToString();
+        }
 
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = Math.Floor(popSum).ToString();
         GameObject.Find("MoneyRateValue").GetComponent<Text>().text = globalProductivityRate.ToString("F2");

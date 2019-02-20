@@ -64,9 +64,13 @@ public class Ship : MonoBehaviour {
         Destination = DstPlanet;
         progress = 0f;
         srcR = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().R;
+        R = srcR;
         dstR = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().R;
         srcTheta = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().Theta;
+        Theta = srcTheta;
+        prevSrcTheta = srcTheta;
         dstTheta = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().Theta;
+        prevDstTheta = dstTheta;
         progressPerSecond = 1 / (timer);
     }
 }

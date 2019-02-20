@@ -79,10 +79,12 @@ MonoBehaviour:
   planetName: 
   planetClickAnimation: {fileID: 1291454064072086, guid: 6fa473c2f6a164f84aec412f8ecad7ea,
     type: 2}
-  taxRate: 0
+  newPlanetSpawned: 0
+  newPlanetPopThreshold: 100
+  productivity: 0
   popCapacity: 0
   popIncreaseCost: 0
-  popGrowthRate: 0.0003
+  popGrowthRate: 0
   colonizeMoneyCost: 1000
 --- !u!212 &212711047896282306
 SpriteRenderer:

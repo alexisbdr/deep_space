@@ -7,6 +7,7 @@ using System;
 public class PlanetSpawner : MonoBehaviour {
 
     public GameObject PlanetParent;
+    public Ship ShipPrefab;
     public int numPlanetsSpawned = 0;
     
     // Use this for initialization
@@ -49,6 +50,11 @@ public class PlanetSpawner : MonoBehaviour {
         }
 
         newPlanet.AssignID(planetID);
+        if (!is_first)
+        {
+            Ship newShip = Instantiate<Ship>(ShipPrefab);
+            newShip.InitializeShip(0, planetID, 10);
+        }
 
     }
 
