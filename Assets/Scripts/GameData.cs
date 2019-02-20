@@ -64,6 +64,6 @@ public class planetData
     public const double colonizeMoneyCostScale = 1.1;
 
     public const double popAutoGrowthCostBase = 1;
-    public const double popAutoGrowthCostScale = 1.2;
+    public const double popAutoGrowthCostScale = 1.3;
     
 }
