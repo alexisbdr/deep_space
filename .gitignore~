@@ -1,0 +1,16 @@
+*.meta
+*~
+*.swn
+*.swo
+*.swp
+venv/*
+Packages/*
+Library/*
+Temp/*
+*.sln
+*.csproj
+.vs/*
+*/.vs
+obj/*
+Build/*
+ProjectSettings/ProjectVersion.txt

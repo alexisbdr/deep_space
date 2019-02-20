@@ -98,7 +98,6 @@ public class Planet : MonoBehaviour {
         Theta += Time.fixedDeltaTime / (10 * R * R);
         Theta = Theta % (2 * Mathf.PI);
 
-        //Sigmoid approximation of population growth //Could try to refine this
         population += popGrowthRate * population *
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
                       Time.fixedDeltaTime +
@@ -168,14 +167,12 @@ public class Planet : MonoBehaviour {
         {
             for (int i = 0; i < generalData.numPlanets; i++)
             {
-                Debug.Log("1");
                 Planet selectedPlanet = GameObject.Find("planet" + i.ToString()).GetComponent<Planet>();
                 selectedPlanet.population -= planetData.colonizePopCost;
                 if (i != ActivePlanetId 
                     && selectedPlanet.population >= planetData.popIncreaseThreshold 
                     && (selectedPlanet.population - planetData.popIncreaseThreshold) >= planetData.colonizePopCost)
                 {
-                    Debug.Log("2");
                     selectedPlanet.population -= planetData.colonizePopCost;
                     gameDetails.money -= planetData.colonizeMoneyCost;
                     activePlanet.population += planetData.colonizePopCost;
