@@ -17,6 +17,12 @@
 #Temp files 
 *~
 
+#Solution file
+*.sln
+
+#csproj - have no idea what this is
+*.csproj
+
 # Gradle cache directory
 .gradle/
 
