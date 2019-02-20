@@ -54,6 +54,7 @@ public class Details : MonoBehaviour
             GameObject.Find("PopValue").GetComponent<Text>().text = Math.Floor(planet.population).ToString();
             GameObject.Find("ProductivityValue").GetComponent<Text>().text = planet.productivity.ToString();
             GameObject.Find("PlanetNameText").GetComponent<Text>().text = planet.planetName;
+            GameObject.Find("PopRateValue").GetComponent<Text>().text = planet.fixedPopGrowth.ToString();
 
             GameObject.Find("SpawnPlanet").transform.Find("PopCost").GetComponent<Text>().text =
                 planet.newPlanetPopThreshold.ToString();
@@ -79,10 +80,12 @@ public class Details : MonoBehaviour
         //Productivity mechanics
         double globalProductivityRate = 0;
         double popSum = 0;
+        double popGrowthSum = 0; 
         foreach (var planet in FindObjectsOfType<Planet>())
         {
             popSum += planet.population;
             globalProductivityRate += planet.population * planet.productivity;
+            popGrowthSum += planet.fixedPopGrowth;
         }
         money += Time.deltaTime * globalProductivityRate;
         if (globalProductivityRate < 1)
@@ -95,6 +98,8 @@ public class Details : MonoBehaviour
 
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = Math.Floor(popSum).ToString();
         GameObject.Find("MoneyRateValue").GetComponent<Text>().text = globalProductivityRate.ToString("F2");
+        GameObject.Find("GlobalPopRateValue").GetComponent<Text>().text = Math.Floor(popGrowthSum).ToString();
+
     }
 
     //use this for value updates
