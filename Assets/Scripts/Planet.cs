@@ -63,8 +63,8 @@ public class Planet : MonoBehaviour {
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
-    private float scalePlanetHover = 1.4f;
-    private float scalePlanetClick = 1.2f;
+    private float scalePlanetHover = 2f;
+    private float scalePlanetClick = 1.7f;
 
     public bool newPlanetSpawned = false;
     public double newPlanetPopThreshold;
