@@ -30,7 +30,6 @@ public class PlanetLabel : MonoBehaviour
     {
         //Get Parent planet informationm 
         parentPlanet = transform.parent.GetComponent<Planet>();
-        Debug.Log(transform.parent.name);
         AssignName(transform.parent.name);
 
         _textMesh = GetComponent<TextMesh>();
@@ -45,7 +44,7 @@ public class PlanetLabel : MonoBehaviour
 
     public void AssignName(string parentName)
     {
-        int id = parentName[parentName.Length - 1];
+        string id = parentName.Substring(parentName.Length - 1, 1);
         gameObject.name = "planetLabel" + id;
     }
 
