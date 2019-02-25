@@ -86,6 +86,10 @@ MonoBehaviour:
   popIncreaseCost: 0
   popGrowthRate: 0
   colonizeMoneyCost: 1000
+  fixedPopGrowth: 0
+  autoGrowthCost: 0
+  planetLabel: {fileID: 1026696115403214, guid: 11fd84eeda703fa499f455e0568398c4,
+    type: 2}
 --- !u!212 &212711047896282306
 SpriteRenderer:
   m_ObjectHideFlags: 1

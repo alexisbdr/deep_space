@@ -60,8 +60,8 @@ public class Planet : MonoBehaviour {
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
-    private float scalePlanetHover = 1.4f;
-    private float scalePlanetClick = 1.2f;
+    public float scalePlanetHover;
+    public float scalePlanetClick;
 
     public bool newPlanetSpawned = false;
     public double newPlanetPopThreshold;
@@ -73,6 +73,9 @@ public class Planet : MonoBehaviour {
     public double fixedPopGrowth;
     public double autoGrowthCost;
 
+    //Label Stuff - Just in case
+    public GameObject planetLabel; 
+
 
     // Use this for initialization
     void Start () {
@@ -80,14 +83,20 @@ public class Planet : MonoBehaviour {
         popGrowthRate = planetData.popGrowthRate;
         colonizeMoneyCost = planetData.colonizeMoneyCost;
         autoGrowthCost = planetData.popAutoGrowthCostBase;
+        scalePlanetHover = planetData.scalePlanetHover;
+        scalePlanetClick = planetData.scalePlanetClick;
 
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
+        
         //Theta
         Theta = UnityEngine.Random.value * 2*Mathf.PI;
         fixedPopGrowth = 0;
-	}
+
+        //Initialize label and badge elements
+        Instantiate(planetLabel).transform.parent = gameObject.transform;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -96,13 +105,7 @@ public class Planet : MonoBehaviour {
 	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
 	        transform.parent.position = position;
 	    }
-        //Do the Label stuff here although we might not be happy with this
-	    gameObject.GetComponent<Text>().text = population.ToString();
-	    float x_posn = transform.position.x + planetData.labelOffset;
-	    float y_posn = transform.position.y + planetData.labelOffset;
-	    Vector2 labelPosition = new Vector2(x_posn, y_posn);
-	    gameObject.GetComponent<Text>().transform.parent.position = Camera.main.WorldToScreenPoint(transform.position);
-	}
+    }
 
     private void FixedUpdate()
     {
@@ -120,34 +123,30 @@ public class Planet : MonoBehaviour {
                       fixedPopGrowth * Time.deltaTime;
     }
 
-    /**
-     * The gui label doesn't stick the the game object unless you create a new canvas
-    private void OnGUI()
-    {
-        GUIStyle LabelStyle =new GUIStyle(GUI.skin.GetStyle("label"));
-        LabelStyle.fontSize = 10;
-        LabelStyle.normal.textColor = Color.white;
-        var x_posn = transform.position.x + 10;
-        var y_posn = transform.position.y + 10;
-        GUI.Label(new Rect(x_posn, y_posn, 10, 10), population.ToString(), LabelStyle);
-    }
-    **/
-
     private void OnMouseEnter()
     {
+        //Update GameObject
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         _planetMoving = false;
+
+        //Update Label Position
+        planetLabel.GetComponent<PlanetLabel>().hover = true;
     }
 
     private void OnMouseExit()
     {
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         _planetMoving = true;
+
+        planetLabel.GetComponent<PlanetLabel>().hover = false;
+        planetLabel.GetComponent<PlanetLabel>().click = true;
     }
 
     private void OnMouseUpAsButton()
     {
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+
+        planetLabel.GetComponent<PlanetLabel>().hover = true;
     }
 
     private void OnMouseDown()
@@ -159,6 +158,8 @@ public class Planet : MonoBehaviour {
         GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
         Instantiate(planetClickAnimation).transform.parent = transform.parent;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
+
+        planetLabel.GetComponent<PlanetLabel>().click = true;
     }
     
     public void AssignID(int id)

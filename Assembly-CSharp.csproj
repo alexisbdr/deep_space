@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\IncreasePopulationGrowth.cs" />
      <Compile Include="Assets\Scripts\Planet.cs" />
      <Compile Include="Assets\Scripts\PlanetClickAnimation.cs" />
+     <Compile Include="Assets\Scripts\PlanetLabel.cs" />
      <Compile Include="Assets\Scripts\PlanetSpawner.cs" />
      <Compile Include="Assets\Scripts\SelectLeftPlanet.cs" />
      <Compile Include="Assets\Scripts\SelectRightPlatform.cs" />

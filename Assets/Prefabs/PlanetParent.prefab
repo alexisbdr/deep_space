@@ -33,7 +33,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4170962722342656}
+  - component: {fileID: 224942246838133212}
   - component: {fileID: 212369413896508496}
   - component: {fileID: 114576759127523430}
   - component: {fileID: 58851915577433178}
@@ -44,19 +44,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4170962722342656
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697306852998228}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4983841135377554}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4983841135377554
 Transform:
   m_ObjectHideFlags: 1
@@ -67,7 +54,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4170962722342656}
+  - {fileID: 224942246838133212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,11 +95,17 @@ MonoBehaviour:
   planetName: 
   planetClickAnimation: {fileID: 1291454064072086, guid: 6fa473c2f6a164f84aec412f8ecad7ea,
     type: 2}
-  taxRate: 0
+  newPlanetSpawned: 0
+  newPlanetPopThreshold: 0
+  productivity: 0
   popCapacity: 0
   popIncreaseCost: 0
   popGrowthRate: 0.0003
   colonizeMoneyCost: 1000
+  fixedPopGrowth: 0
+  autoGrowthCost: 0
+  planetLabel: {fileID: 1026696115403214, guid: 11fd84eeda703fa499f455e0568398c4,
+    type: 2}
 --- !u!212 &212369413896508496
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -159,3 +152,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &224942246838133212
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697306852998228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4983841135377554}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.64, y: 0.64}
+  m_Pivot: {x: 0.5, y: 0.5}

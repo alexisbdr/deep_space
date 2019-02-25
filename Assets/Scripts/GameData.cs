@@ -66,6 +66,10 @@ public class planetData
     public const double popAutoGrowthCostBase = 1;
     public const double popAutoGrowthCostScale = 1.3;
 
+    //Planet Scaling on Hover 
+    public const float scalePlanetHover = 1.4f;
+    public const float scalePlanetClick = 1.2f;
+
     //Label stuff
-    public const float labelOffset = 1.0f;
+    public static float[] labelOffset = new float[2] {-.0825f, .59f};
 }
