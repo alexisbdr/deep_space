@@ -14,6 +14,15 @@
 # Visual Studio cache directory
 .vs/
 
+#Temp files 
+*~
+
+#Solution file
+*.sln
+
+#csproj - have no idea what this is
+*.csproj
+
 # Gradle cache directory
 .gradle/
 
@@ -50,3 +59,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+deep_space.sln
+Assembly-CSharp.csproj

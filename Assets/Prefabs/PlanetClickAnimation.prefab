@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4757839262193070}
   - component: {fileID: 23120314780645244}
   - component: {fileID: 102558124206304708}
-  - component: {fileID: 95568082581000994}
   - component: {fileID: 114166481156481284}
   m_Layer: 5
   m_Name: PlanetClickAnimation
@@ -78,24 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &95568082581000994
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291454064072086}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e33a6cebe77f24ab6bc747d3238269ba, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!102 &102558124206304708
 TextMesh:
   serializedVersion: 3
@@ -103,7 +84,7 @@ TextMesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291454064072086}
-  m_Text: +100
+  m_Text: +1
   m_OffsetZ: 0
   m_CharacterSize: 0.2
   m_LineSpacing: 1
