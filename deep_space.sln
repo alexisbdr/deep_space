@@ -1,9 +1,9 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{6B7B7342-17AE-57C3-F2F7-BA5DF8C1DCE2}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deep_space", "Assembly-CSharp.csproj", "{6B7B7342-17AE-57C3-F2F7-BA5DF8C1DCE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{CD00F8C0-2D42-6906-05CB-631058DEF2E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deep_space", "Assembly-CSharp-Editor-firstpass.csproj", "{CD00F8C0-2D42-6906-05CB-631058DEF2E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +22,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,10 @@ guid: caba99d19dbc14245a296124531d6b86
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PlanetParent: {fileID: 1429975987162650, guid: 5c355808c630f449fbbda42078edd6dc,
+      type: 2}
+  - ShipPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

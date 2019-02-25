@@ -68,13 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68a86eb5b47a814dbd2bd3ce7275845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InhabitedPlanetSprite: {fileID: 21300000, guid: 76aee530427395348aa6cf559026c02b,
+  InhabitedPlanetSprite: {fileID: 21300000, guid: 1441e5df26fb86d4dac11cc0f9a1837c,
     type: 3}
-  InhabitedPlanetSelectedSprite: {fileID: 21300000, guid: af1a028f05ad155449dffef25732a0f6,
+  InhabitedPlanetSelectedSprite: {fileID: 21300000, guid: 1441e5df26fb86d4dac11cc0f9a1837c,
     type: 3}
-  UninhabitedPlanetSprite: {fileID: 21300000, guid: 38beebce9f56db4409270c850c5a558f,
+  UninhabitedPlanetSprite: {fileID: 21300000, guid: 25dfe2de7782a4540bfbb8e0e797a4db,
     type: 3}
-  UninhabitedPlanetSelectedSprite: {fileID: 21300000, guid: 3b505fe6d87bcc848a36179e3feef7cb,
+  UninhabitedPlanetSelectedSprite: {fileID: 21300000, guid: 25dfe2de7782a4540bfbb8e0e797a4db,
     type: 3}
   planetName: 
   planetClickAnimation: {fileID: 1291454064072086, guid: 6fa473c2f6a164f84aec412f8ecad7ea,
@@ -86,6 +86,8 @@ MonoBehaviour:
   popIncreaseCost: 0
   popGrowthRate: 0
   colonizeMoneyCost: 1000
+  fixedPopGrowth: 0
+  autoGrowthCost: 0
 --- !u!212 &212711047896282306
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -129,6 +131,6 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
