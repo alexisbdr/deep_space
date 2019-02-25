@@ -75,6 +75,8 @@ public class Planet : MonoBehaviour {
 
     //Label Stuff - Just in case
     public GameObject planetLabel; 
+    //Badge Stuff 
+    public GameObject planetBadge;
 
 
     // Use this for initialization
@@ -130,7 +132,7 @@ public class Planet : MonoBehaviour {
         _planetMoving = false;
 
         //Update Label Position
-        planetLabel.GetComponent<PlanetLabel>().hover = true;
+        planetLabel.GetComponent<PlanetLabel>().hoverLabelPosn();
     }
 
     private void OnMouseExit()
@@ -138,15 +140,11 @@ public class Planet : MonoBehaviour {
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         _planetMoving = true;
 
-        planetLabel.GetComponent<PlanetLabel>().hover = false;
-        planetLabel.GetComponent<PlanetLabel>().click = true;
     }
 
     private void OnMouseUpAsButton()
     {
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
-
-        planetLabel.GetComponent<PlanetLabel>().hover = true;
     }
 
     private void OnMouseDown()
@@ -159,7 +157,6 @@ public class Planet : MonoBehaviour {
         Instantiate(planetClickAnimation).transform.parent = transform.parent;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
 
-        planetLabel.GetComponent<PlanetLabel>().click = true;
     }
     
     public void AssignID(int id)

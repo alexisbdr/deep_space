@@ -12,19 +12,7 @@ public class PlanetLabel : MonoBehaviour
     private Planet parentPlanet;
     private string labelName;
 
-    private bool _hover;
-    public bool hover
-    {
-        get { return _hover; }
-        set { _hover = value; }
-    }
-
-    private bool _click;
-    public bool click 
-    {
-        get { return _click; }
-        set { _click = value; }
-    }
+    public float[] labelOffset;
 
     private void Start()
     {
@@ -34,33 +22,23 @@ public class PlanetLabel : MonoBehaviour
 
         _textMesh = GetComponent<TextMesh>();
         _textMesh.text = population.ToString();
+
+        labelOffset = planetData.labelOffset;
+        Debug.Log(labelOffset);
     }
 
     void Update()
     {
         _textMesh.text = Math.Floor(parentPlanet.population).ToString();
-        updateLabelPosn();
+
+        float new_posn_x = transform.parent.position.x + labelOffset[0];
+        float new_posn_y = transform.parent.position.y + labelOffset[1];
+        _textMesh.transform.position = new Vector2(new_posn_x, new_posn_y);
     }
 
     public void AssignName(string parentName)
     {
         string id = parentName.Substring(parentName.Length - 1, 1);
         gameObject.name = "planetLabel" + id;
-    }
-
-    public void updateLabelPosn()
-    {
-        float new_posn_x = transform.parent.position.x + planetData.labelOffset[0];
-        float new_posn_y = transform.parent.position.y + planetData.labelOffset[1];
-        if(hover)
-        {
-            new_posn_y += parentPlanet.scalePlanetHover;
-        }
-
-        if(click)
-        {
-            new_posn_y += parentPlanet.scalePlanetClick;
-        }
-        _textMesh.transform.position = new Vector2(new_posn_x, new_posn_y);
     }
 }
