@@ -8,10 +8,12 @@ using System;
 public class Planet : MonoBehaviour {
 
     //Sprites
-    public Sprite InhabitedPlanetSprite;
-    public Sprite InhabitedPlanetSelectedSprite;
-    public Sprite UninhabitedPlanetSprite;
-    public Sprite UninhabitedPlanetSelectedSprite;
+    //public Sprite InhabitedPlanetSprite;
+    //public Sprite InhabitedPlanetSelectedSprite;
+    //public Sprite UninhabitedPlanetSprite;
+    //public Sprite UninhabitedPlanetSelectedSprite;
+    public List<Sprite> inhabitedSprites;
+    public List<Sprite> uninhabitedSprites;
 
     //GUI elements
     Canvas DetailsCanvas;
@@ -61,8 +63,8 @@ public class Planet : MonoBehaviour {
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
-    private float scalePlanetHover = 1.4f;
-    private float scalePlanetClick = 1.2f;
+    private float scalePlanetHover = 2f;
+    private float scalePlanetClick = 1.7f;
 
     public bool newPlanetSpawned = false;
     public double newPlanetPopThreshold;
@@ -87,10 +89,14 @@ public class Planet : MonoBehaviour {
         //Theta
         Theta = UnityEngine.Random.value * 2*Mathf.PI;
         fixedPopGrowth = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        inhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/inhabited"));
+        uninhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/uninhabited"));
+        gameObject.GetComponent<SpriteRenderer>().sprite = uninhabitedSprites[UnityEngine.Random.Range(0,uninhabitedSprites.Count)];
+    }
+
+    // Update is called once per frame
+    void Update () {
 	    if (_planetMoving)
 	    {
 	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
@@ -122,7 +128,13 @@ public class Planet : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        if (!IsSelected)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        } else
+        {
+            gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        }
         _planetMoving = true;
     }
 
@@ -152,14 +164,15 @@ public class Planet : MonoBehaviour {
     //Call either SetStarting or SetNonStarting on spawn
     public void SetStarting()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
-        IsTerraformed = true;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+        //IsTerraformed = true;
+        IsTerraformed = false;
         IsSelected = false;
     }
 
     public void SetNonStarting() 
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
         IsTerraformed = false;
         IsSelected = false;
     }
@@ -207,6 +220,18 @@ public class Planet : MonoBehaviour {
         if (id == planetID)
         {
             IsSelected = true;
+            gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        }
+        else
+        {
+            IsSelected = false;
+            gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        /**
+        if (id == planetID)
+        {
+            IsSelected = true;
             if (IsTerraformed)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSelectedSprite;
@@ -225,5 +250,6 @@ public class Planet : MonoBehaviour {
                 gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
             }
         }
+        **/
     }
 }
