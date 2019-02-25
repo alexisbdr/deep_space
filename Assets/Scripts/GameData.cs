@@ -65,5 +65,7 @@ public class planetData
 
     public const double popAutoGrowthCostBase = 1;
     public const double popAutoGrowthCostScale = 1.3;
-    
+
+    //Label stuff
+    public const float labelOffset = 1.0f;
 }

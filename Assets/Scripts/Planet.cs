@@ -17,7 +17,6 @@ public class Planet : MonoBehaviour {
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
 
-
     //whether or not this planet appears in planet details
     bool IsSelected=false;
     
@@ -57,7 +56,7 @@ public class Planet : MonoBehaviour {
         get { return _population; }
         set { _population = value; }
     }
-
+ 
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
@@ -73,6 +72,7 @@ public class Planet : MonoBehaviour {
     public double colonizeMoneyCost;
     public double fixedPopGrowth;
     public double autoGrowthCost;
+
 
     // Use this for initialization
     void Start () {
@@ -96,9 +96,15 @@ public class Planet : MonoBehaviour {
 	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
 	        transform.parent.position = position;
 	    }
+        //Do the Label stuff here although we might not be happy with this
+	    gameObject.GetComponent<Text>().text = population.ToString();
+	    float x_posn = transform.position.x + planetData.labelOffset;
+	    float y_posn = transform.position.y + planetData.labelOffset;
+	    Vector2 labelPosition = new Vector2(x_posn, y_posn);
+	    gameObject.GetComponent<Text>().transform.parent.position = Camera.main.WorldToScreenPoint(transform.position);
 	}
 
-  private void FixedUpdate()
+    private void FixedUpdate()
     {
         if (_planetMoving)
         {
@@ -113,6 +119,19 @@ public class Planet : MonoBehaviour {
                       Time.fixedDeltaTime +
                       fixedPopGrowth * Time.deltaTime;
     }
+
+    /**
+     * The gui label doesn't stick the the game object unless you create a new canvas
+    private void OnGUI()
+    {
+        GUIStyle LabelStyle =new GUIStyle(GUI.skin.GetStyle("label"));
+        LabelStyle.fontSize = 10;
+        LabelStyle.normal.textColor = Color.white;
+        var x_posn = transform.position.x + 10;
+        var y_posn = transform.position.y + 10;
+        GUI.Label(new Rect(x_posn, y_posn, 10, 10), population.ToString(), LabelStyle);
+    }
+    **/
 
     private void OnMouseEnter()
     {
