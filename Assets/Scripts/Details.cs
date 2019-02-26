@@ -25,7 +25,13 @@ public class Details : MonoBehaviour
         get { return _money; }
         set { _money = value; }
     }
+    
+    // science points
+    public double science = 0;
 
+    // general stats for state of game
+    public double planetSpawnThreshold;
+        
     //which planet was clicked most recently
     public int ActivePlanetId;
 
@@ -35,6 +41,8 @@ public class Details : MonoBehaviour
         PlanetDetailsPanelObj = GameObject.Find("PlanetDetailsPanel");
         PlanetDetailsPanelObj.SetActive(false);
         money = 0;
+        science = 0;
+        planetSpawnThreshold = generalData.planetSpawnThreshold;
         _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
  
         foreach (var button in GameObject.FindGameObjectsWithTag("upgradeButton"))
@@ -56,23 +64,19 @@ public class Details : MonoBehaviour
             GameObject.Find("PlanetNameText").GetComponent<Text>().text = planet.planetName;
             GameObject.Find("PopRateValue").GetComponent<Text>().text = planet.fixedPopGrowth.ToString();
 
-            GameObject.Find("SpawnPlanet").transform.Find("PopCost").GetComponent<Text>().text =
-                planet.newPlanetPopThreshold.ToString();
-
-            if (planet.population >= planet.newPlanetPopThreshold)
+            
+            if (planet.productivity < 1)
             {
-                var imageButton = GameObject.Find("SpawnPlanet").transform.Find("PopButton").GetComponent<Image>();
-                imageButton.color = _buttonClickableColor;
-                imageButton.sprite = buttonClickableSprite;
-            }
-            else
+                GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(planet.cryptocoins * 100) / 100).ToString();
+            } else
             {
-                var imageButton = GameObject.Find("SpawnPlanet").transform.Find("PopButton").GetComponent<Image>();
-                imageButton.color = _buttonNotClickableColor;
-                imageButton.sprite = null;
+                GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(planet.cryptocoins)).ToString();
             }
 
-            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = Math.Ceiling(planet.autoGrowthCost).ToString();
+            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = planet.autoGrowthCost.ToString();
+            GameObject.Find("IncProdCost").GetComponent<Text>().text = planet.productivityGrowthCost.ToString();
+            GameObject.Find("GetScienceCost").GetComponent<Text>().text = planet.sciencePopCost.ToString();
+            
         }
         
            
@@ -88,17 +92,13 @@ public class Details : MonoBehaviour
             popGrowthSum += planet.fixedPopGrowth;
         }
         money += Time.deltaTime * globalProductivityRate;
-        if (globalProductivityRate < 1)
-        {
-            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money * 100) / 100).ToString();
-        } else
-        {
-            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money)).ToString();
-        }
 
+
+        GameObject.Find("ScienceVal").GetComponent<Text>().text = science.ToString();
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = Math.Floor(popSum).ToString();
-        GameObject.Find("MoneyRateValue").GetComponent<Text>().text = globalProductivityRate.ToString("F2");
-        GameObject.Find("GlobalPopRateValue").GetComponent<Text>().text = Math.Floor(popGrowthSum).ToString();
+        GameObject.Find("PopCost").GetComponent<Text>().text = planetSpawnThreshold.ToString();
+        //GameObject.Find("MoneyRateValue").GetComponent<Text>().text = globalProductivityRate.ToString("F2");
+        //GameObject.Find("PopRateValue").GetComponent<Text>().text = Math.Floor(popGrowthSum).ToString();
 
     }
 

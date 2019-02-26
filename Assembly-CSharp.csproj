@@ -57,6 +57,8 @@
     <Compile Include="Assets\Scripts\ClosePlanetDetails.cs" />
     <Compile Include="Assets\Scripts\Details.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\GetScience.cs" />
+    <Compile Include="Assets\Scripts\IncProd.cs" />
     <Compile Include="Assets\Scripts\IncreasePopulationGrowth.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Planet.cs" />

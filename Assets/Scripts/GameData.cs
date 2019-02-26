@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,15 @@ using UnityEngine.UI;
 public static class generalData
 {
     public const int numPlanets = 8;
+    
+    //population number when new planet can be spawned
+    public const double planetSpawnThreshold = 100;
+    //scale for newPlanetPopThreshold
+    public const double planetSpawnThresholdScale = 10;
 }
 
 public class firstPlanetData {
-    public const double productivity = 0.01;
+    public const double productivity = 0.5;
 
     //Planet Population Constants 
     public const int startingPopulation = 0;
@@ -32,8 +38,8 @@ public class firstPlanetData {
 
 public class planetData
 {
-    public const double productivity = 0.01;
-
+    public const double productivity = 0.5;
+    
     //Planet Population Constants 
     public const int startingPopulation = 0;
     public const long populationCapacity = 6000000000000;
@@ -63,7 +69,15 @@ public class planetData
     //Scale by which the colonization cost ncreases
     public const double colonizeMoneyCostScale = 1.1;
 
-    public const double popAutoGrowthCostBase = 1;
-    public const double popAutoGrowthCostScale = 1.3;
-    
+    public const double popAutoGrowthCostBase = 2;
+    public const double popAutoGrowthCostScale = 4;
+
+    public const double productivityGrowthCost = 2;
+    public const double productivityGrowthCostScale = 4;
+    public const double productivityUpgadeScale = 2;
+    public const double planetStartCryptoScale = 10;
+
+
+    public const double planetSciencePopCost = 150;
+    public const double planetSciencePopCostScale = 5;
 }

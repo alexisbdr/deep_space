@@ -59,6 +59,8 @@ public class Planet : MonoBehaviour {
         get { return _population; }
         set { _population = value; }
     }
+    
+    
 
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
@@ -75,6 +77,9 @@ public class Planet : MonoBehaviour {
     public double colonizeMoneyCost;
     public double fixedPopGrowth;
     public double autoGrowthCost;
+    public double productivityGrowthCost;
+    public double cryptocoins;
+    public double sciencePopCost;
 
     // Use this for initialization
     void Start () {
@@ -82,7 +87,11 @@ public class Planet : MonoBehaviour {
         popGrowthRate = planetData.popGrowthRate;
         colonizeMoneyCost = planetData.colonizeMoneyCost;
         autoGrowthCost = planetData.popAutoGrowthCostBase;
-
+        productivityGrowthCost = (_planetID+1) * productivity;
+        
+        cryptocoins = _planetID * planetData.planetStartCryptoScale;
+        sciencePopCost = planetData.planetSciencePopCost;
+        
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
@@ -118,6 +127,9 @@ public class Planet : MonoBehaviour {
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
                       Time.fixedDeltaTime +
                       fixedPopGrowth * Time.deltaTime;
+        
+        //Updating population
+        cryptocoins += productivity * Time.deltaTime;
     }
 
     private void OnMouseEnter()
@@ -212,6 +224,12 @@ public class Planet : MonoBehaviour {
     {
         fixedPopGrowth += 1;
         autoGrowthCost *= planetData.popAutoGrowthCostScale;
+    }
+
+    public void AddProductivityGrowth()
+    {
+        productivityGrowthCost *= planetData.productivityGrowthCostScale;
+        productivity *= planetData.productivityUpgadeScale;
     }
 
     //The planet is selected in the details component
