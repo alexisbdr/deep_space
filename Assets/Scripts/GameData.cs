@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public static class generalData
 {
-    public const int numPlanets = 8;
+    public const int numPlanetsMax = 5;
     
     //population number when new planet can be spawned
     public const double planetSpawnThreshold = 100;

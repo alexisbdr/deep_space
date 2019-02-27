@@ -189,6 +189,7 @@ public class Planet : MonoBehaviour {
         IsSelected = false;
     }
 
+    /*
     public void AddPopulation()
     {
         Details gameDetails = GameObject.Find("DetailsCanvas").GetComponent<Details>();
@@ -219,6 +220,7 @@ public class Planet : MonoBehaviour {
             }
         }
     }
+    */
 
     public void AddPopulationGrowth()
     {
