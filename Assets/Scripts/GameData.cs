@@ -72,4 +72,6 @@ public class planetData
 
     //Label stuff
     public static float[] labelOffset = new float[2] {-.0825f, .59f};
+    //Badge stuff 
+    public static float[] prodBadgeOffset = new float[2] {.3f, .3f};
 }

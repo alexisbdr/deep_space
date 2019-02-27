@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using  UnityEngine; 
+using UnityEngine; 
 using UnityEngine.UI;
 using System; 
 
@@ -24,7 +24,6 @@ public class PlanetLabel : MonoBehaviour
         _textMesh.text = population.ToString();
 
         labelOffset = planetData.labelOffset;
-        Debug.Log(labelOffset);
     }
 
     void Update()
@@ -40,5 +39,14 @@ public class PlanetLabel : MonoBehaviour
     {
         string id = parentName.Substring(parentName.Length - 1, 1);
         gameObject.name = "planetLabel" + id;
+    }
+
+    //Need to figure out how to call this function from outside?
+    public void hoverPosn()
+    {
+        float hoverScaling = planetData.scalePlanetHover; 
+        //Only in Y direction for the label 
+        float new_posn_y = transform.parent.position.y + hoverScaling;
+        _textMesh.transform.position = new Vector2(_textMesh.transform.position.x, new_posn_y);
     }
 }

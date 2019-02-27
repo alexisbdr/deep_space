@@ -80,7 +80,8 @@ public class Planet : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         newPlanetPopThreshold = planetData.newPlanetPopThreshold;
         popGrowthRate = planetData.popGrowthRate;
         colonizeMoneyCost = planetData.colonizeMoneyCost;
@@ -91,16 +92,18 @@ public class Planet : MonoBehaviour {
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
-        
+
         //Theta
-        Theta = UnityEngine.Random.value * 2*Mathf.PI;
+        Theta = UnityEngine.Random.value * 2 * Mathf.PI;
         fixedPopGrowth = 0;
 
-        //Initialize label and badge elements
+        //Initialize label and badge elements as children of the current planet
         Instantiate(planetLabel).transform.parent = gameObject.transform;
+        RectTransform badge = Instantiate(planetBadge).GetComponent<RectTransform>();
+        badge.SetParent(gameObject.transform, false);
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 	void Update () {
 	    if (_planetMoving)
 	    {
@@ -132,7 +135,7 @@ public class Planet : MonoBehaviour {
         _planetMoving = false;
 
         //Update Label Position
-        planetLabel.GetComponent<PlanetLabel>().hoverLabelPosn();
+        //planetLabel.GetComponent<PlanetLabel>().hoverLabelPosn();
     }
 
     private void OnMouseExit()
@@ -154,7 +157,7 @@ public class Planet : MonoBehaviour {
         
         // Logic and Animation for each Planet Click
         GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
-        Instantiate(planetClickAnimation).transform.parent = transform.parent;
+        Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
 
     }

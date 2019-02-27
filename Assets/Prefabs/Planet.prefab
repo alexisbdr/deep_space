@@ -79,6 +79,8 @@ MonoBehaviour:
   planetName: 
   planetClickAnimation: {fileID: 1291454064072086, guid: 6fa473c2f6a164f84aec412f8ecad7ea,
     type: 2}
+  scalePlanetHover: 0
+  scalePlanetClick: 0
   newPlanetSpawned: 0
   newPlanetPopThreshold: 100
   productivity: 0
@@ -89,6 +91,8 @@ MonoBehaviour:
   fixedPopGrowth: 0
   autoGrowthCost: 0
   planetLabel: {fileID: 1026696115403214, guid: 11fd84eeda703fa499f455e0568398c4,
+    type: 2}
+  planetBadge: {fileID: 1904535973481508, guid: 1b1ae2aca10a2e646bd1af859374b832,
     type: 2}
 --- !u!212 &212711047896282306
 SpriteRenderer:

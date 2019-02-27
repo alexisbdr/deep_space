@@ -91,7 +91,7 @@ TextMesh:
   m_CharacterSize: 0.2
   m_LineSpacing: 1
   m_Anchor: 0
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 11
   m_FontStyle: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1386ad9ea118a84f9f080487a91b6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelOffset: []
