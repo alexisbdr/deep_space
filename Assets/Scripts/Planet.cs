@@ -126,7 +126,7 @@ public class Planet : MonoBehaviour {
         population += popGrowthRate * population *
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
                       Time.fixedDeltaTime +
-                      fixedPopGrowth * Time.deltaTime;
+                      fixedPopGrowth * Time.deltaTime * DetailsCanvas.GetComponent<Details>().popClick;
         
         //Updating population
         cryptocoins += productivity * Time.deltaTime;
@@ -169,7 +169,7 @@ public class Planet : MonoBehaviour {
     public void AssignID(int id)
     {
         planetID = id;
-        R = (1.5f + id)*0.6f;
+        R = (1.3f + id)*0.8f;
         gameObject.name = "planet" + planetID.ToString();
     }
 
@@ -189,6 +189,7 @@ public class Planet : MonoBehaviour {
         IsSelected = false;
     }
 
+    /*
     public void AddPopulation()
     {
         Details gameDetails = GameObject.Find("DetailsCanvas").GetComponent<Details>();
@@ -219,6 +220,7 @@ public class Planet : MonoBehaviour {
             }
         }
     }
+    */
 
     public void AddPopulationGrowth()
     {
@@ -229,7 +231,7 @@ public class Planet : MonoBehaviour {
     public void AddProductivityGrowth()
     {
         productivityGrowthCost *= planetData.productivityGrowthCostScale;
-        productivity *= planetData.productivityUpgadeScale;
+        productivity *= planetData.productivityUpgradeScale;
     }
 
     //The planet is selected in the details component

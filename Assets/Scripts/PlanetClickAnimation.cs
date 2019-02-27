@@ -12,13 +12,15 @@ public class PlanetClickAnimation : MonoBehaviour {
 	private float _timeElapsed;
 	
 	private static float _animationColorTime = 1.4f;
-	
-	
-	// Use this for initialization
-	void Start ()
-	{
-		_textMesh = GetComponent<TextMesh>();
-		_textMesh.text = "+" + planetData.popClick;
+
+    Details detailsObj;
+
+    // Use this for initialization
+    void Start ()
+    {
+        detailsObj = GameObject.Find("DetailsCanvas").GetComponent<Details>();
+        _textMesh = GetComponent<TextMesh>();
+        _textMesh.text = "+" + GameUtils.formatLargeNumber(detailsObj.popClick);
 		_startColor = _textMesh.color;
 		// end color is transparent start color
 		_endColor = new Color(_startColor.r, _startColor.g, _startColor.b, 0);

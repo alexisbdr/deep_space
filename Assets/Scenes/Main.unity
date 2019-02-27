@@ -1627,7 +1627,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonClickableSprite: {fileID: 0}
   science: 0
-  newPlanetThreshold: 0
+  planetSpawnThreshold: 0
+  clickUpgradeCost: 1
+  popClick: 1
   ActivePlanetId: 0
 --- !u!1 &1054705958
 GameObject:
@@ -2227,8 +2229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6e56cbda2424cb3862ac3213cb01b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnThreshold: 0
-  spawnThresholdScale: 0
 --- !u!1 &1315808823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,6 +2860,22 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1523247035}
   m_CullTransparentMesh: 0
+--- !u!1 &1562952462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace,
+    type: 2}
+  m_PrefabInternal: {fileID: 1934961723}
+--- !u!114 &1562952467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1562952462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10ef15eefad3cf4dabb2331603a8008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562981169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,7 +3178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1666034869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3919,7 +3935,7 @@ GameObject:
   - component: {fileID: 1840452958}
   - component: {fileID: 1840452957}
   m_Layer: 5
-  m_Name: Random
+  m_Name: ClickUpgradeCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3941,7 +3957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 49, y: -55.445}
+  m_AnchoredPosition: {x: 49, y: -41.89}
   m_SizeDelta: {x: 160, y: 20.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840452957
@@ -4196,7 +4212,7 @@ Prefab:
     - target: {fileID: 224825884808834882, guid: 46feae061346d4f2890a4e165871eace,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -145.09999
+      value: -147.47
       objectReference: {fileID: 0}
     - target: {fileID: 224825884808834882, guid: 46feae061346d4f2890a4e165871eace,
         type: 2}
@@ -4255,7 +4271,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1427478657516552, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_Name
-      value: Random (1)
+      value: ClickUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 114893950861655424, guid: 46feae061346d4f2890a4e165871eace,
         type: 2}
@@ -4285,18 +4301,18 @@ Prefab:
     - target: {fileID: 114468703515197196, guid: 46feae061346d4f2890a4e165871eace,
         type: 2}
       propertyPath: m_Text
-      value: Random Button
+      value: Upgrade Clicks
       objectReference: {fileID: 0}
     - target: {fileID: 114019025992532144, guid: 46feae061346d4f2890a4e165871eace,
         type: 2}
       propertyPath: m_Text
-      value: 'Experience hands-free domination.
+      value: 'Click smarter, not harder
 
-        > Cost:  $'
+        > Cost:'
       objectReference: {fileID: 0}
     - target: {fileID: 1926054617466848, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_Name
-      value: Random
+      value: ClickUpgradeDescr
       objectReference: {fileID: 0}
     - target: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_TagString
@@ -4304,15 +4320,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1107672020503126, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_Name
-      value: Random
+      value: ClickUpgradeBtn
       objectReference: {fileID: 0}
     - target: {fileID: 1486430327531128, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_Name
-      value: Random
+      value: ClickUpgradeBtnText
       objectReference: {fileID: 0}
     - target: {fileID: 1427478657516552, guid: 46feae061346d4f2890a4e165871eace, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114459740739659570, guid: 46feae061346d4f2890a4e165871eace, type: 2}

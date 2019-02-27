@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public static class generalData
 {
-    public const int numPlanets = 8;
+    public const int numPlanetsMax = 5;
     
     //population number when new planet can be spawned
     public const double planetSpawnThreshold = 100;
     //scale for newPlanetPopThreshold
     public const double planetSpawnThresholdScale = 10;
+
+    public const double upgradeClickCostScale = 2;
+    public const double popClickScale = 10;
 }
 
 public class firstPlanetData {
@@ -45,7 +48,7 @@ public class planetData
     public const long populationCapacity = 6000000000000;
     
     //population addition for each planet click
-    public const double popClick = 1;
+    //public const double popClick = 1;
     //population number when new planet can be spawned
     public const double newPlanetPopThreshold = 100;
     //scale for newPlanetPopThreshold
@@ -70,11 +73,11 @@ public class planetData
     public const double colonizeMoneyCostScale = 1.1;
 
     public const double popAutoGrowthCostBase = 2;
-    public const double popAutoGrowthCostScale = 4;
+    public const double popAutoGrowthCostScale = 2;
 
     public const double productivityGrowthCost = 2;
     public const double productivityGrowthCostScale = 4;
-    public const double productivityUpgadeScale = 2;
+    public const double productivityUpgradeScale = 2;
     public const double planetStartCryptoScale = 10;
 
 
