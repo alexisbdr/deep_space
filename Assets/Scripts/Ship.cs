@@ -16,12 +16,18 @@ public class Ship : MonoBehaviour {
     float progressPerSecond;
     float R;
     float Theta;
+    float timer;
+    Vector2 sizeMax;
+    Vector2 sizeCurrent;
 
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        timer = 0;
+        sizeMax = transform.localScale ;
+        sizeCurrent = new Vector2(0f,0f);
+        transform.localScale = sizeCurrent;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -44,17 +50,25 @@ public class Ship : MonoBehaviour {
         prevDstTheta = dstTheta;
         R = Mathf.Lerp(srcR, dstR, progress);
         //adding 2pi to dsttheta helps force path to be counter-clockwise
-        Theta = Mathf.Lerp(srcTheta, dstTheta+2*Mathf.PI, progress);
+        Theta = Mathf.Lerp(srcTheta, dstTheta, progress);
         Vector2 position = new Vector2(R * Mathf.Cos(Theta), R * Mathf.Sin(Theta));
         transform.position = position;
     }
 
     private void FixedUpdate()
     {
-        progress = progress + progressPerSecond * Time.fixedDeltaTime;
-        if (progress > 1)
+        if (timer > 0.5f)
         {
-            Destroy(gameObject);
+            progress = progress + progressPerSecond * Time.fixedDeltaTime;
+            if (progress > 1)
+            {
+                Destroy(gameObject);
+            }
+        } else {
+            sizeCurrent.x = Mathf.Lerp(0, sizeMax.x, timer * 2);
+            sizeCurrent.y = Mathf.Lerp(0, sizeMax.y, timer * 2);
+            transform.localScale = sizeCurrent;
+            timer = timer + Time.fixedDeltaTime;
         }
     }
 
