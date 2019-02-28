@@ -8,10 +8,12 @@ using System;
 public class Planet : MonoBehaviour {
 
     //Sprites
-    public Sprite InhabitedPlanetSprite;
-    public Sprite InhabitedPlanetSelectedSprite;
-    public Sprite UninhabitedPlanetSprite;
-    public Sprite UninhabitedPlanetSelectedSprite;
+    //public Sprite InhabitedPlanetSprite;
+    //public Sprite InhabitedPlanetSelectedSprite;
+    //public Sprite UninhabitedPlanetSprite;
+    //public Sprite UninhabitedPlanetSelectedSprite;
+    public List<Sprite> inhabitedSprites;
+    public List<Sprite> uninhabitedSprites;
 
     //GUI elements
     Canvas DetailsCanvas;
@@ -56,12 +58,14 @@ public class Planet : MonoBehaviour {
         get { return _population; }
         set { _population = value; }
     }
+
  
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
     public float scalePlanetHover;
     public float scalePlanetClick;
+
 
     public bool newPlanetSpawned = false;
     public double newPlanetPopThreshold;
@@ -72,6 +76,9 @@ public class Planet : MonoBehaviour {
     public double colonizeMoneyCost;
     public double fixedPopGrowth;
     public double autoGrowthCost;
+    public double productivityGrowthCost;
+    public double cryptocoins;
+    public double sciencePopCost;
 
     //Label Stuff - Just in case
     public GameObject planetLabel; 
@@ -89,6 +96,12 @@ public class Planet : MonoBehaviour {
         scalePlanetHover = planetData.scalePlanetHover;
         scalePlanetClick = planetData.scalePlanetClick;
 
+
+        productivityGrowthCost = (_planetID+1) * productivity;
+        
+        cryptocoins = _planetID * planetData.planetStartCryptoScale;
+        sciencePopCost = planetData.planetSciencePopCost;
+
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
@@ -101,10 +114,14 @@ public class Planet : MonoBehaviour {
         Instantiate(planetLabel).transform.parent = gameObject.transform;
         RectTransform badge = Instantiate(planetBadge).GetComponent<RectTransform>();
         badge.SetParent(gameObject.transform, false);
+
+        inhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/inhabited"));
+        uninhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/uninhabited"));
+        gameObject.GetComponent<SpriteRenderer>().sprite = uninhabitedSprites[UnityEngine.Random.Range(0,uninhabitedSprites.Count)];
     }
 
     // Update is called once per frame
-	void Update () {
+    void Update () {
 	    if (_planetMoving)
 	    {
 	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
@@ -125,7 +142,10 @@ public class Planet : MonoBehaviour {
         population += popGrowthRate * population *
                       (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
                       Time.fixedDeltaTime +
-                      fixedPopGrowth * Time.deltaTime;
+                      fixedPopGrowth * Time.deltaTime * DetailsCanvas.GetComponent<Details>().popClick;
+        
+        //Updating population
+        cryptocoins += productivity * Time.deltaTime;
     }
 
     private void OnMouseEnter()
@@ -140,7 +160,13 @@ public class Planet : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        if (!IsSelected)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        } else
+        {
+            gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        }
         _planetMoving = true;
 
     }
@@ -165,25 +191,27 @@ public class Planet : MonoBehaviour {
     public void AssignID(int id)
     {
         planetID = id;
-        R = (1.5f + id)*0.6f;
+        R = (1.3f + id)*0.8f;
         gameObject.name = "planet" + planetID.ToString();
     }
 
     //Call either SetStarting or SetNonStarting on spawn
     public void SetStarting()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
-        IsTerraformed = true;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = InhabitedPlanetSprite;
+        //IsTerraformed = true;
+        IsTerraformed = false;
         IsSelected = false;
     }
 
     public void SetNonStarting() 
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
         IsTerraformed = false;
         IsSelected = false;
     }
 
+    /*
     public void AddPopulation()
     {
         Details gameDetails = GameObject.Find("DetailsCanvas").GetComponent<Details>();
@@ -214,6 +242,7 @@ public class Planet : MonoBehaviour {
             }
         }
     }
+    */
 
     public void AddPopulationGrowth()
     {
@@ -221,9 +250,27 @@ public class Planet : MonoBehaviour {
         autoGrowthCost *= planetData.popAutoGrowthCostScale;
     }
 
+    public void AddProductivityGrowth()
+    {
+        productivityGrowthCost *= planetData.productivityGrowthCostScale;
+        productivity *= planetData.productivityUpgradeScale;
+    }
+
     //The planet is selected in the details component
     public void SetSelected(int id)
     {
+        if (id == planetID)
+        {
+            IsSelected = true;
+            gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        }
+        else
+        {
+            IsSelected = false;
+            gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        /**
         if (id == planetID)
         {
             IsSelected = true;
@@ -245,5 +292,6 @@ public class Planet : MonoBehaviour {
                 gameObject.GetComponent<SpriteRenderer>().sprite = UninhabitedPlanetSprite;
             }
         }
+        **/
     }
 }

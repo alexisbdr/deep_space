@@ -23,7 +23,7 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     {
         int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
-        if (detailsObj.GetComponent<Details>().money > planet.autoGrowthCost)
+        if (planet.cryptocoins > planet.autoGrowthCost)
         {
             //make button look clickable
             gameObject.GetComponent<Image>().color = _buttonClickableColor;
@@ -38,9 +38,9 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     {
         int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
-        if (detailsObj.GetComponent<Details>().money > planet.autoGrowthCost)
+        if (planet.cryptocoins > planet.autoGrowthCost)
         {
-            detailsObj.GetComponent<Details>().money -= planet.autoGrowthCost;
+            planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
         }
     }
