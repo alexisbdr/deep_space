@@ -85,6 +85,7 @@ public class Planet : MonoBehaviour {
     //Badge Stuff 
     public GameObject planetBadge;
 
+    public bool onMouse = false;
 
     // Use this for initialization
     void Start()
@@ -148,14 +149,13 @@ public class Planet : MonoBehaviour {
         cryptocoins += productivity * Time.deltaTime;
     }
 
+    //Hovering behavior
     private void OnMouseEnter()
     {
         //Update GameObject
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         _planetMoving = false;
-
-        //Update Label Position
-        //planetLabel.GetComponent<PlanetLabel>().hoverLabelPosn();
+        onMouse = true;
     }
 
     private void OnMouseExit()
@@ -168,12 +168,13 @@ public class Planet : MonoBehaviour {
             gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         }
         _planetMoving = true;
-
+        onMouse = false;
     }
 
     private void OnMouseUpAsButton()
     {
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
+        onMouse = true;
     }
 
     private void OnMouseDown()
@@ -186,6 +187,7 @@ public class Planet : MonoBehaviour {
         Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
 
+        onMouse = true;
     }
     
     public void AssignID(int id)
