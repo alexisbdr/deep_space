@@ -37,6 +37,7 @@ public class PlanetBadge : MonoBehaviour
         badgeText.text = Math.Floor(parentPlanet.popGrowthRate).ToString();
 
         Vector2 parentPosn = badgeTransform.parent.position;
+        Vector3 parentScale = badgeTransform.parent.localScale;
         float new_posn_x = parentPosn.x + badgeOffset[0];
         float new_posn_y = parentPosn.y + badgeOffset[1];
         gameObject.GetComponent<PlanetBadge>().transform.position = new Vector2(new_posn_x, new_posn_y);
