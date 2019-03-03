@@ -28,7 +28,7 @@ public class PlanetLabel : MonoBehaviour
 
     void Update()
     {
-        _textMesh.text = Math.Floor(parentPlanet.population).ToString();
+        _textMesh.text = GameUtils.formatLargeNumber(Math.Floor(parentPlanet.population));
 
         float parentScale_y = transform.parent.localScale.y; 
         _textMesh.transform.localPosition = new Vector2(labelOffset[0], labelOffset[1]*parentScale_y);

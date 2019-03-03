@@ -79,7 +79,7 @@ public class planetData
     public const float scalePlanetClick = 1.2f;
 
     //Label stuff
-    public static float[] labelOffset = new float[2] {0f, .5f};
+    public static float[] labelOffset = new float[2] {-.1f, .5f};
     //Badge stuff 
     public static float[] prodBadgeOffset = new float[2] {.3f, .3f};
 

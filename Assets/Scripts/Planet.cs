@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 
 public class Planet : MonoBehaviour {
@@ -85,8 +86,6 @@ public class Planet : MonoBehaviour {
     //Badge Stuff 
     public GameObject planetBadge;
 
-    public bool onMouse = false;
-
     // Use this for initialization
     void Start()
     {
@@ -155,7 +154,6 @@ public class Planet : MonoBehaviour {
         //Update GameObject
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         _planetMoving = false;
-        onMouse = true;
     }
 
     private void OnMouseExit()
@@ -168,26 +166,22 @@ public class Planet : MonoBehaviour {
             gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         }
         _planetMoving = true;
-        onMouse = false;
     }
 
     private void OnMouseUpAsButton()
     {
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
-        onMouse = true;
     }
 
     private void OnMouseDown()
     {
         PlanetDetailsPanelObj.SetActive(true);
         GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
-        
+
         // Logic and Animation for each Planet Click
         GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
         Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
-
-        onMouse = true;
     }
     
     public void AssignID(int id)

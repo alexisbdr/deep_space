@@ -6,6 +6,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
+using UnityEngine.EventSystems;
 
 public class Details : MonoBehaviour
 {
