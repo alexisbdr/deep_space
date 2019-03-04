@@ -175,6 +175,19 @@ public class Planet : MonoBehaviour {
             prodBadge = false;
         }
 
+        if (population > sciencePopCost && !scienceBadge)
+        {
+            _planetBadgeScience = planetBadgeScience;
+            _planetBadgeScience = Instantiate(_planetBadgeScience);
+            _planetBadgeScience.transform.parent = gameObject.transform;
+            scienceBadge = true;
+        }
+        else if (population < sciencePopCost && scienceBadge)
+        {
+            Destroy(_planetBadgeScience);
+            scienceBadge = false;
+        }
+      
         float theta_orbit = 0f;
         for (int i = 0; i < 31; i++)
         {
