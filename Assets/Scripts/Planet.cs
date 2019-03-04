@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Security.Permissions;
+using UnityEngine.EventSystems;
 
 
 public class Planet : MonoBehaviour {
@@ -18,7 +20,6 @@ public class Planet : MonoBehaviour {
     //GUI elements
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
-
 
     //whether or not this planet appears in planet details
     bool IsSelected=false;
@@ -59,14 +60,14 @@ public class Planet : MonoBehaviour {
         get { return _population; }
         set { _population = value; }
     }
-    
-    
 
+ 
     // text like "+100" that will fly above planet when clicked
     public GameObject planetClickAnimation;
     // how much to scale planet when hovered
-    private float scalePlanetHover = 2f;
-    private float scalePlanetClick = 1.7f;
+    public float scalePlanetHover;
+    public float scalePlanetClick;
+
 
     public bool newPlanetSpawned = false;
     public double newPlanetPopThreshold;
@@ -81,23 +82,47 @@ public class Planet : MonoBehaviour {
     public double cryptocoins;
     public double sciencePopCost;
 
+    //Label Stuff - Just in case
+    public GameObject planetLabel; 
+    
+    //Badge Stuff 
+    public GameObject planetBadgeClick;
+    private GameObject _planetBadgeClick;   
+    public GameObject planetBadgeProd;
+    private GameObject _planetBadgeProd;
+    public GameObject planetBadgeScience;
+    private GameObject _planetBadgeScience;
+
+    private bool clickBadge = false;
+    private bool prodBadge = false;
+    private bool scienceBadge = false; 
+ 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         newPlanetPopThreshold = planetData.newPlanetPopThreshold;
         popGrowthRate = planetData.popGrowthRate;
         colonizeMoneyCost = planetData.colonizeMoneyCost;
         autoGrowthCost = planetData.popAutoGrowthCostBase;
+        scalePlanetHover = planetData.scalePlanetHover;
+        scalePlanetClick = planetData.scalePlanetClick;
+
+
         productivityGrowthCost = (_planetID+1) * productivity;
         
         cryptocoins = _planetID * planetData.planetStartCryptoScale;
         sciencePopCost = planetData.planetSciencePopCost;
-        
+
         //Initialize GUI elements
         DetailsCanvas = GameObject.Find("DetailsCanvas").GetComponent<Canvas>();
         PlanetDetailsPanelObj = DetailsCanvas.transform.Find("PlanetDetailsPanel").gameObject;
+
         //Theta
-        Theta = UnityEngine.Random.value * 2*Mathf.PI;
+        Theta = UnityEngine.Random.value * 2 * Mathf.PI;
         fixedPopGrowth = 0;
+
+        //Initialize label and badge elements as children of the current planet
+        Instantiate(planetLabel).transform.parent = gameObject.transform;
 
         inhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/inhabited"));
         uninhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/uninhabited"));
@@ -111,9 +136,35 @@ public class Planet : MonoBehaviour {
 	        Vector2 position = new Vector2(R*Mathf.Cos(Theta), R*Mathf.Sin(Theta));
 	        transform.parent.position = position;
 	    }
-	}
 
-  private void FixedUpdate()
+        if (cryptocoins > autoGrowthCost && !clickBadge)
+        {
+            _planetBadgeClick = planetBadgeClick;
+            _planetBadgeClick = Instantiate(_planetBadgeClick);
+            _planetBadgeClick.transform.parent = gameObject.transform;
+            clickBadge = true;
+        }
+        else if(cryptocoins < autoGrowthCost && clickBadge)
+        {
+            Destroy(_planetBadgeClick.gameObject);
+            clickBadge = false;
+        }
+
+        if (cryptocoins > productivityGrowthCost && !prodBadge)
+        {
+            _planetBadgeProd = planetBadgeProd;
+            _planetBadgeProd = Instantiate(_planetBadgeProd);
+            _planetBadgeProd.transform.parent = gameObject.transform;
+            prodBadge = true;
+        }
+        else if (cryptocoins < productivityGrowthCost && prodBadge)
+        {
+            Destroy(_planetBadgeProd.gameObject);
+            prodBadge = false;
+        }
+    }
+
+    private void FixedUpdate()
     {
         if (_planetMoving)
         {
@@ -132,8 +183,10 @@ public class Planet : MonoBehaviour {
         cryptocoins += productivity * Time.deltaTime;
     }
 
+    //Hovering behavior
     private void OnMouseEnter()
     {
+        //Update GameObject
         gameObject.transform.localScale = new Vector3(scalePlanetHover, scalePlanetHover, scalePlanetHover);
         _planetMoving = false;
     }
@@ -159,10 +212,10 @@ public class Planet : MonoBehaviour {
     {
         PlanetDetailsPanelObj.SetActive(true);
         GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
-        
+
         // Logic and Animation for each Planet Click
         GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
-        Instantiate(planetClickAnimation).transform.parent = transform.parent;
+        Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
     }
     

@@ -72,6 +72,20 @@ public class planetData
     //Scale by which the colonization cost ncreases
     public const double colonizeMoneyCostScale = 1.1;
 
+
+
+    //Planet Scaling on Hover 
+    public const float scalePlanetHover = 1.4f;
+    public const float scalePlanetClick = 1.2f;
+
+    //Label stuff
+    public static float[] labelOffset = new float[2] {-.1f, .5f};
+    //Badge stuff 
+    public static float[] clickBadgeOffset = new float[2] {-.3f, .3f};
+    public static float[] prodBadgeOffset = new float[2] { -.3f, .0f };
+    public static float[] scienceBadgeOffset = new float[2] { -.3f, -.3f };
+
+
     public const double popAutoGrowthCostBase = 2;
     public const double popAutoGrowthCostScale = 2;
 
