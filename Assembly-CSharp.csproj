@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Planet.cs" />
      <Compile Include="Assets\Scripts\PlanetBadgeClick.cs" />
      <Compile Include="Assets\Scripts\PlanetBadgeProd.cs" />
+     <Compile Include="Assets\Scripts\PlanetBadgeScience.cs" />
      <Compile Include="Assets\Scripts\PlanetClickAnimation.cs" />
      <Compile Include="Assets\Scripts\PlanetLabel.cs" />
      <Compile Include="Assets\Scripts\PlanetSpawner.cs" />

@@ -105,9 +105,9 @@ MonoBehaviour:
   sciencePopCost: 0
   planetLabel: {fileID: 1026696115403214, guid: 11fd84eeda703fa499f455e0568398c4,
     type: 2}
-  planetBadgeClick: {fileID: 1657148961642040, guid: 1b1ae2aca10a2e646bd1af859374b832,
+  planetBadgeClick: {fileID: 1245627050366714, guid: 1b1ae2aca10a2e646bd1af859374b832,
     type: 2}
-  planetBadgeProd: {fileID: 1351849542190350, guid: a3a8e4a7e643cd04a9e62cf069e86fa3,
+  planetBadgeProd: {fileID: 1246571861653494, guid: a3a8e4a7e643cd04a9e62cf069e86fa3,
     type: 2}
   planetBadgeScience: {fileID: 1211944786097316, guid: e520efab3f94f2e42b766a7b306bb7c7,
     type: 2}

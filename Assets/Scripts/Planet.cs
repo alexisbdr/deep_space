@@ -162,6 +162,19 @@ public class Planet : MonoBehaviour {
             Destroy(_planetBadgeProd.gameObject);
             prodBadge = false;
         }
+
+        if (population > sciencePopCost && !scienceBadge)
+        {
+            _planetBadgeScience = planetBadgeScience;
+            _planetBadgeScience = Instantiate(_planetBadgeScience);
+            _planetBadgeScience.transform.parent = gameObject.transform;
+            scienceBadge = true;
+        }
+        else if (population < sciencePopCost && scienceBadge)
+        {
+            Destroy(_planetBadgeScience);
+            scienceBadge = false;
+        }
     }
 
     private void FixedUpdate()
