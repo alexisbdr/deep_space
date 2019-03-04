@@ -33,7 +33,7 @@ public class Details : MonoBehaviour
     // general stats for state of game
     public double planetSpawnThreshold;
     public double clickUpgradeCost = 1;
-    public double popClick = 1;
+    public double popClick;
         
     //which planet was clicked most recently
     public int ActivePlanetId;
@@ -41,6 +41,7 @@ public class Details : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        popClick = 1;
         PlanetDetailsPanelObj = GameObject.Find("PlanetDetailsPanel");
         PlanetDetailsPanelObj.SetActive(false);
         money = 0;

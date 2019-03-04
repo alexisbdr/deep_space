@@ -5,36 +5,12 @@
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Font" t="Include">
-          <e p="Raleway" t="Include">
-            <e p="OFL.txt" t="Include" />
-          </e>
-        </e>
         <e p="Plugins" t="Include">
           <e p="Editor" t="Include">
             <e p="JetBrains" t="Include">
               <e p="Unity3DRider.cs" t="Include" />
             </e>
           </e>
-        </e>
-        <e p="Scripts" t="Include">
-          <e p="ClosePlanetDetails.cs" t="Include" />
-          <e p="Details.cs" t="Include" />
-          <e p="GameData.cs" t="Include" />
-          <e p="GetScience.cs" t="Include" />
-          <e p="IncProd.cs" t="Include" />
-          <e p="IncreasePopulationGrowth.cs" t="Include" />
-          <e p="MainMenu.cs" t="Include" />
-          <e p="Planet.cs" t="Include" />
-          <e p="PlanetClickAnimation.cs" t="Include" />
-          <e p="PlanetSpawner.cs" t="Include" />
-          <e p="QuitGame.cs" t="Include" />
-          <e p="SelectLeftPlanet.cs" t="Include" />
-          <e p="SelectRightPlatform.cs" t="Include" />
-          <e p="Ship.cs" t="Include" />
-          <e p="SpawnPlanet.cs" t="Include" />
-          <e p="StartGame.cs" t="Include" />
-          <e p="UpgradesManager.cs" t="Include" />
         </e>
       </e>
       <e p="deep_space.sln" t="IncludeFlat" />
