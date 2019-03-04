@@ -63,7 +63,8 @@
      <Compile Include="Assets\Scripts\IncreasePopulationGrowth.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Planet.cs" />
-     <Compile Include="Assets\Scripts\PlanetBadge.cs" />
+     <Compile Include="Assets\Scripts\PlanetBadgeClick.cs" />
+     <Compile Include="Assets\Scripts\PlanetBadgeProd.cs" />
      <Compile Include="Assets\Scripts\PlanetClickAnimation.cs" />
      <Compile Include="Assets\Scripts\PlanetLabel.cs" />
      <Compile Include="Assets\Scripts\PlanetSpawner.cs" />
