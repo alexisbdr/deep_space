@@ -17,6 +17,9 @@ public class Planet : MonoBehaviour {
     public List<Sprite> inhabitedSprites;
     public List<Sprite> uninhabitedSprites;
 
+    //Materials
+    public Material defaultMaterial;
+
     //GUI elements
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
@@ -127,6 +130,15 @@ public class Planet : MonoBehaviour {
         inhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/inhabited"));
         uninhabitedSprites = new List<Sprite>(Resources.LoadAll<Sprite>("Sprites/uninhabited"));
         gameObject.GetComponent<SpriteRenderer>().sprite = uninhabitedSprites[UnityEngine.Random.Range(0,uninhabitedSprites.Count)];
+
+        LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.positionCount = 31;
+        lineRenderer.widthMultiplier = 0.02f;
+        lineRenderer.sortingOrder = -1;
+        lineRenderer.startColor = new Color(1, 1, 1);
+        lineRenderer.endColor = new Color(1, 1, 1);
+        defaultMaterial = Resources.Load<Material>("Materials/defaultMaterial");
+        lineRenderer.material = new Material(defaultMaterial);
     }
 
     // Update is called once per frame
@@ -161,6 +173,14 @@ public class Planet : MonoBehaviour {
         {
             Destroy(_planetBadgeProd.gameObject);
             prodBadge = false;
+        }
+
+        float theta_orbit = 0f;
+        for (int i = 0; i < 31; i++)
+        {
+            Vector2 position = new Vector2(R * Mathf.Cos(theta_orbit), R * Mathf.Sin(theta_orbit));
+            theta_orbit += Mathf.PI * 2 / 30;
+            gameObject.GetComponent<LineRenderer>().SetPosition(i, position);
         }
     }
 
@@ -218,11 +238,11 @@ public class Planet : MonoBehaviour {
         Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
     }
-    
+
     public void AssignID(int id)
     {
         planetID = id;
-        R = (1.3f + id)*0.8f;
+        R = (1.3f + id) * 0.8f;
         gameObject.name = "planet" + planetID.ToString();
     }
 
