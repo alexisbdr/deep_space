@@ -14,7 +14,9 @@ public class Details : MonoBehaviour
     //GUI elements
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
-
+    GameObject ScienceGamblePanel;
+    
+    
     public Sprite buttonClickableSprite;
     private Color _buttonClickableColor = Color.white;
     private Color _buttonNotClickableColor;
@@ -44,6 +46,9 @@ public class Details : MonoBehaviour
         popClick = 1;
         PlanetDetailsPanelObj = GameObject.Find("PlanetDetailsPanel");
         PlanetDetailsPanelObj.SetActive(false);
+        ScienceGamblePanel = GameObject.Find("ScienceGamble");
+        ScienceGamblePanel.SetActive(false);
+        
         money = 0;
         science = 0;
         planetSpawnThreshold = generalData.planetSpawnThreshold;
@@ -94,6 +99,11 @@ public class Details : MonoBehaviour
         GameObject.Find("ScienceVal").GetComponent<Text>().text = science.ToString();
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(popSum);
 
+        if (science >= 1)
+        {
+            ScienceGamblePanel.SetActive(true);
+        }
+        
         if (GameObject.Find("PopCost"))
         {
             GameObject.Find("PopCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planetSpawnThreshold);

@@ -58,10 +58,14 @@ public class ScienceGamble : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 		if (!isGambling && detailsObj.GetComponent<Details>().science >= 1)
 		{
 			canGamble = true;
+		}
+		else
+		{
+			canGamble = false;
 		}
 
 		if (canGamble)
@@ -96,7 +100,7 @@ public class ScienceGamble : MonoBehaviour
 		scienceTaken = (int) Mathf.Ceil((float) detailsObj.GetComponent<Details>().science / 2);
 		detailsObj.GetComponent<Details>().science -= scienceTaken;
 		
-		scienceReceived = Random.Range(0, 2 * scienceTaken + 1);
+		scienceReceived = Random.Range(scienceTaken, 3 * scienceTaken);
 		gambleResultText.text = "Gambling " + scienceTaken + " Science...";
 	}
 

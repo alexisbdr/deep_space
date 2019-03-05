@@ -61,8 +61,11 @@ public class PlanetClickAnimation : MonoBehaviour {
     private void posnStart()
     {
         //Seed random posn_x
-        float posn_x = Random.Range(0.1f, .4f);
-        float posn_y = Random.Range(.3f, .45f);
+        //float posn_x = Random.Range(0.1f, .4f);
+        //float posn_y = Random.Range(.3f, .45f);
+	    float posn_x = .25f;
+	    float posn_y = .2f;
+	    
         //What's daddy's scale?
         float parenScale = parentPlanet.transform.localScale.y;
 
