@@ -9,8 +9,8 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     Color _buttonNotClickableColor;
     Color _buttonClickableColor;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         //TODO: make listener persistent?
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
