@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ClickIcon.cs" />
      <Compile Include="Assets\Scripts\ClickUpgrade.cs" />
      <Compile Include="Assets\Scripts\ClosePlanetDetails.cs" />
      <Compile Include="Assets\Scripts\Details.cs" />

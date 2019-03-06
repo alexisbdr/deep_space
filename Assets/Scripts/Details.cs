@@ -69,14 +69,14 @@ public class Details : MonoBehaviour
         {
             Planet planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
             GameObject.Find("PopValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.population);
-            GameObject.Find("ProductivityValue").GetComponent<Text>().text = "(+ $" + GameUtils.formatLargeNumber(planet.productivity) + "/person)";
+            GameObject.Find("ProductivityValue").GetComponent<Text>().text = "+ $" + GameUtils.formatLargeNumber(planet.productivity) + "/person";
             GameObject.Find("PlanetNameText").GetComponent<Text>().text = planet.planetName;
-            GameObject.Find("PopRateValue").GetComponent<Text>().text = "(+ " + GameUtils.formatLargeNumber((planet.fixedPopGrowth*popClick)) + " /sec)";
+            GameObject.Find("PopRateValue").GetComponent<Text>().text = "+ " + GameUtils.formatLargeNumber((planet.fixedPopGrowth*popClick)) + " /sec";
 
             GameObject.Find("MoneyValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.cryptocoins);
 
-            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.autoGrowthCost);
-            GameObject.Find("IncProdCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.productivityGrowthCost);
+            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = "$ " + GameUtils.formatLargeNumber(planet.autoGrowthCost);
+            GameObject.Find("IncProdCost").GetComponent<Text>().text = "$ " + GameUtils.formatLargeNumber(planet.productivityGrowthCost);
             GameObject.Find("GetScienceCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.sciencePopCost);
             
         }
