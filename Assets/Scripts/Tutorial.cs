@@ -39,7 +39,7 @@ public class Tutorial : MonoBehaviour {
         {
             if (GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().numPlanetsSpawned > 4)
             {
-                stage = 5;
+                stage = 8;
                 gameObject.GetComponent<Text>().text = "You colonized this system in no time! When you're ready, click next level to colonize a new system and rebuild humanity.";
             }
         }
@@ -83,7 +83,7 @@ public class Tutorial : MonoBehaviour {
 
     void OnNextLvlClicked()
     {
-        stage = 8;
+        stage = 9;
         gameObject.GetComponent<Text>().text = "";
     }
 }
