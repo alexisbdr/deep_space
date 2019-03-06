@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Security.Permissions;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.UIElements;
 
 
 public class Planet : MonoBehaviour {
@@ -139,6 +140,15 @@ public class Planet : MonoBehaviour {
         lineRenderer.endColor = new Color(1, 1, 1);
         defaultMaterial = Resources.Load<Material>("Materials/defaultMaterial");
         lineRenderer.material = new Material(defaultMaterial);
+        
+        float theta_orbit = 0f;
+        
+        for (int i = 0; i < 31; i++)
+        {
+            Vector2 position = new Vector2(R * Mathf.Cos(theta_orbit), R * Mathf.Sin(theta_orbit));
+            theta_orbit += Mathf.PI * 2 / 30;
+            gameObject.GetComponent<LineRenderer>().SetPosition(i, position);
+        }
     }
 
     // Update is called once per frame
@@ -188,13 +198,7 @@ public class Planet : MonoBehaviour {
             scienceBadge = false;
         }
       
-        float theta_orbit = 0f;
-        for (int i = 0; i < 31; i++)
-        {
-            Vector2 position = new Vector2(R * Mathf.Cos(theta_orbit), R * Mathf.Sin(theta_orbit));
-            theta_orbit += Mathf.PI * 2 / 30;
-            gameObject.GetComponent<LineRenderer>().SetPosition(i, position);
-        }
+        
     }
 
     private void FixedUpdate()
@@ -207,10 +211,13 @@ public class Planet : MonoBehaviour {
         }
         
         //Sigmoid approximation of population growth //Could try to refine this
-        population += popGrowthRate * population *
-                      (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
-                      Time.fixedDeltaTime +
-                      fixedPopGrowth * Time.deltaTime * DetailsCanvas.GetComponent<Details>().popClick;
+        double morePop = popGrowthRate * population *
+                         (Math.Log10(Math.Max(1, popCapacity)) - Math.Log10(Math.Max(1, population))) *
+                         Time.fixedDeltaTime +
+                         fixedPopGrowth * Time.deltaTime * DetailsCanvas.GetComponent<Details>().popClick;
+        
+        population += morePop;
+        DetailsCanvas.GetComponent<Details>().universalPopulation += morePop;
         
         //Updating population
         cryptocoins += productivity * Time.deltaTime;
@@ -244,10 +251,10 @@ public class Planet : MonoBehaviour {
     private void OnMouseDown()
     {
         PlanetDetailsPanelObj.SetActive(true);
-        GameObject.Find("DetailsCanvas").SendMessage("SetActivePlanetID", planetID);
+        DetailsCanvas.SendMessage("SetActivePlanetID", planetID);
 
         // Logic and Animation for each Planet Click
-        GameObject.Find("DetailsCanvas").SendMessage("PlanetClicked", planetID);
+        DetailsCanvas.SendMessage("PlanetClicked", planetID);
         Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);
     }
