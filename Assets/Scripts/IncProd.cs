@@ -41,6 +41,10 @@ public class IncProd : MonoBehaviour {
 		{
 			planet.cryptocoins -= planet.productivityGrowthCost;
 			planet.AddProductivityGrowth();
-		}
-	}
+            if (GameObject.Find("TutorialText"))
+            {
+                GameObject.Find("TutorialText").SendMessage("OnIncProdClicked");
+            }
+        }
+    }
 }

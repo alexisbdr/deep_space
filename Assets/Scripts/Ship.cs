@@ -19,6 +19,7 @@ public class Ship : MonoBehaviour {
     float timer;
     Vector2 sizeMax;
     Vector2 sizeCurrent;
+    bool newSystem;
 
 
 	// Use this for initialization
@@ -32,9 +33,12 @@ public class Ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        srcR = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().R;
+        if (!newSystem)
+        {
+            srcR = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().R;
+            srcTheta = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().Theta;
+        }
         dstR = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().R;
-        srcTheta = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().Theta;
         //Lerp breaks when theta rolls over from 2pi to 0
         //add 2pi once per revolution of planet since ship began
         while (srcTheta < prevSrcTheta)
@@ -76,15 +80,29 @@ public class Ship : MonoBehaviour {
     {
         Source = SrcPlanet;
         Destination = DstPlanet;
-        progress = 0f;
-        srcR = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().R;
-        R = srcR;
-        dstR = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().R;
-        srcTheta = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().Theta;
-        Theta = srcTheta;
-        prevSrcTheta = srcTheta;
+
+        if (Source == Destination)
+        {
+            srcR = 10;
+            R = srcR;
+            srcTheta = 3 * Mathf.PI / 4;
+            Theta = srcTheta;
+            prevSrcTheta = srcTheta;
+            newSystem = true;
+        }
+        else
+        {
+            srcR = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().R;
+            R = srcR;
+            dstR = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().R;
+            srcTheta = GameObject.Find("planet" + Source.ToString()).GetComponent<Planet>().Theta;
+            Theta = srcTheta;
+            prevSrcTheta = srcTheta;
+            newSystem = false;
+        }
         dstTheta = GameObject.Find("planet" + Destination.ToString()).GetComponent<Planet>().Theta;
         prevDstTheta = dstTheta;
+        progress = 0f;
         progressPerSecond = 1 / (timer);
     }
 }

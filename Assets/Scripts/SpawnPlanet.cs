@@ -23,13 +23,8 @@ public class SpawnPlanet : MonoBehaviour
 	
 	void Update()
 	{
-		double popsum = 0;
-		foreach (var p in FindObjectsOfType<Planet>())
-		{
-			popsum += p.population;
-		}
 		
-		if (popsum >= detailsScript.planetSpawnThreshold)
+		if (detailsScript.universalPopulation >= detailsScript.planetSpawnThreshold)
 		{
 			gameObject.GetComponent<Image>().color = _buttonClickableColor;
 		}
@@ -41,16 +36,10 @@ public class SpawnPlanet : MonoBehaviour
 
 	void OnClickListener()
 	{
-		
-		double popsum = 0;
-		foreach (var p in FindObjectsOfType<Planet>())
+		PlanetSpawner planetSpawner = GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>();
+		if (detailsScript.universalPopulation >= detailsScript.planetSpawnThreshold)
 		{
-			popsum += p.population;
-		}
-		
-		if (popsum >= detailsScript.planetSpawnThreshold)
-		{
-			GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>().CreateNewPlanet();
+			planetSpawner.CreateNewPlanet();
 			detailsScript.planetSpawnThreshold *= generalData.planetSpawnThresholdScale;
 		}
 		
