@@ -38,6 +38,10 @@ public class ClickUpgrade : MonoBehaviour {
             detailsObj.science -= detailsObj.clickUpgradeCost;
             detailsObj.clickUpgradeCost *= generalData.upgradeClickCostScale;
             detailsObj.popClick *= generalData.popClickScale;
+            if (GameObject.Find("TutorialText"))
+            {
+                GameObject.Find("TutorialText").SendMessage("OnUpgradeClicks");
+            }
         }
     }
 }

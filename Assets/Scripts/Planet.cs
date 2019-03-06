@@ -133,7 +133,8 @@ public class Planet : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().sprite = uninhabitedSprites[UnityEngine.Random.Range(0,uninhabitedSprites.Count)];
 
         LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.positionCount = 31;
+        int numSegments = 500;
+        lineRenderer.positionCount = numSegments+1;
         lineRenderer.widthMultiplier = 0.02f;
         lineRenderer.sortingOrder = -1;
         lineRenderer.startColor = new Color(1, 1, 1);
@@ -143,10 +144,10 @@ public class Planet : MonoBehaviour {
         
         float theta_orbit = 0f;
         
-        for (int i = 0; i < 31; i++)
+        for (int i = 0; i < numSegments+1; i++)
         {
             Vector2 position = new Vector2(R * Mathf.Cos(theta_orbit), R * Mathf.Sin(theta_orbit));
-            theta_orbit += Mathf.PI * 2 / 30;
+            theta_orbit += Mathf.PI * 2 / numSegments;
             gameObject.GetComponent<LineRenderer>().SetPosition(i, position);
         }
     }
@@ -254,6 +255,10 @@ public class Planet : MonoBehaviour {
         DetailsCanvas.SendMessage("SetActivePlanetID", planetID);
 
         // Logic and Animation for each Planet Click
+        if (GameObject.Find("TutorialText"))
+        {
+            GameObject.Find("TutorialText").SendMessage("OnPlanetClicked");
+        }
         DetailsCanvas.SendMessage("PlanetClicked", planetID);
         Instantiate(planetClickAnimation).transform.parent = gameObject.transform;
         gameObject.transform.localScale = new Vector3(scalePlanetClick, scalePlanetClick, scalePlanetClick);

@@ -42,6 +42,10 @@ public class IncreasePopulationGrowth : MonoBehaviour {
         {
             planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
+            if (GameObject.Find("TutorialText"))
+            {
+                GameObject.Find("TutorialText").SendMessage("OnBuyAutoClicked");
+            }
         }
     }
 }

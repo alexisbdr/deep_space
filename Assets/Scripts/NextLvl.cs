@@ -4,7 +4,6 @@ using TMPro;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Vuforia;
 using Image = UnityEngine.UI.Image;
 
 public class NextLvl : MonoBehaviour
@@ -68,7 +67,11 @@ public class NextLvl : MonoBehaviour
 			star = GameObject.Find("star" + detailsObj.level);
 			StartNewLvl();
 			is_animating = true;
-		}
+            if (GameObject.Find("TutorialText"))
+            {
+                GameObject.Find("TutorialText").SendMessage("OnNextLvlClicked");
+            }
+        }
 	}
 
 	void StartNewLvl()
