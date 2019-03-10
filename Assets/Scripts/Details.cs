@@ -75,8 +75,8 @@ public class Details : MonoBehaviour
 
             GameObject.Find("MoneyValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.cryptocoins);
 
-            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = "$ " + GameUtils.formatLargeNumber(planet.autoGrowthCost) + "  ";
-            GameObject.Find("IncProdCost").GetComponent<Text>().text = "Productivity $ " + GameUtils.formatLargeNumber(planet.productivityGrowthCost);
+            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = "$" + GameUtils.formatLargeNumber(planet.autoGrowthCost);
+            GameObject.Find("IncProdCost").GetComponent<Text>().text = "$" + GameUtils.formatLargeNumber(planet.productivityGrowthCost);
             GameObject.Find("GetScienceCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.sciencePopCost);
             
         }
@@ -106,7 +106,7 @@ public class Details : MonoBehaviour
         
         if (GameObject.Find("PopCost"))
         {
-            GameObject.Find("PopCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planetSpawnThreshold);
+            GameObject.Find("PopCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planetSpawnThreshold) + " Universal Population";
         }
 
         GameObject.Find("ClickUpgradeCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(clickUpgradeCost) + " Science Points";

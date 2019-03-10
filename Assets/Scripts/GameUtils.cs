@@ -20,13 +20,13 @@ public static class GameUtils {
         if (num > 1000)
         {
             num = System.Math.Floor(num);
-            num /= 1000;
+            num /= 100;
             modifier = "M";
         }
         if (num > 1000)
         {
             num = System.Math.Floor(num);
-            num /= 1000;
+            num /= 100;
             modifier = "B";
         }
         if (num > 1000)
@@ -39,8 +39,23 @@ public static class GameUtils {
         {
             num = System.Math.Floor(num);
             num /= 1000;
-            modifier = "Q";
+            modifier = "Qa";
         }
+
+        if (num > 1000)
+        {
+            num = System.Math.Floor(num);
+            num /= 1000;
+            modifier = "Qi";
+        }
+
+        if (num > 1000)
+        {
+            num = System.Math.Floor(num);
+            num /= 1000;
+            modifier = "Sx";
+        }
+
         if (num.ToString().Length > 4)
         {
             if (num.ToString().Substring(3,1) == ".")

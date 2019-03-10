@@ -14,7 +14,7 @@ public class ClickUpgrade : MonoBehaviour {
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
         detailsObj = GameObject.Find("DetailsCanvas").GetComponent<Details>();
         _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
-        _buttonClickableColor = Color.white;
+        _buttonClickableColor = new Color(224f / 255f, 170f / 255f, 33f / 255f, 255f / 255f);
     }
 
     // Update is called once per frame
