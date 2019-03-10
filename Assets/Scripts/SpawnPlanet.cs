@@ -38,8 +38,9 @@ public class SpawnPlanet : MonoBehaviour
 	{
 		PlanetSpawner planetSpawner = GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>();
 		if (detailsScript.universalPopulation >= detailsScript.planetSpawnThreshold)
-		{
-			planetSpawner.CreateNewPlanet();
+        {
+            gameObject.GetComponent<AudioSource>().Play(0);
+            planetSpawner.CreateNewPlanet();
 			detailsScript.planetSpawnThreshold *= generalData.planetSpawnThresholdScale;
 		}
 		

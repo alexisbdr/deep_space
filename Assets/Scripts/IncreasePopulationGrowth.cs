@@ -40,6 +40,7 @@ public class IncreasePopulationGrowth : MonoBehaviour {
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
         if (planet.cryptocoins > planet.autoGrowthCost)
         {
+            gameObject.GetComponent<AudioSource>().Play(0);
             planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
             if (GameObject.Find("TutorialText"))

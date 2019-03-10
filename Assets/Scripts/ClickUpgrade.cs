@@ -35,6 +35,7 @@ public class ClickUpgrade : MonoBehaviour {
     {
         if (detailsObj.science >= detailsObj.clickUpgradeCost)
         {
+            gameObject.GetComponent<AudioSource>().Play(0);
             detailsObj.science -= detailsObj.clickUpgradeCost;
             detailsObj.clickUpgradeCost *= generalData.upgradeClickCostScale;
             detailsObj.popClick *= generalData.popClickScale;

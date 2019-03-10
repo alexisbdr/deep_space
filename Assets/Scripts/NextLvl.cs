@@ -25,6 +25,7 @@ public class NextLvl : MonoBehaviour
 	private float flyAnimDuration = 0.3f;
 	private Vector3 largestSize;
 	private bool rotateRight = true;
+    private bool newLvlClicked = false;
 
 
 	// Use this for initialization
@@ -45,7 +46,7 @@ public class NextLvl : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (planetSpawner.numPlanetsSpawned >= generalData.numPlanetsMax)
+		if (planetSpawner.numPlanetsSpawned >= generalData.numPlanetsMax && !newLvlClicked)
 		{
 			gameObject.GetComponent<Image>().color = _buttonClickableColor;
 		}
@@ -63,8 +64,13 @@ public class NextLvl : MonoBehaviour
 	void OnClickListener()
 	{
 		if (planetSpawner.numPlanetsSpawned >= generalData.numPlanetsMax)
-		{
-			star = GameObject.Find("star" + detailsObj.level);
+        {
+            if (!newLvlClicked)
+            {
+                gameObject.GetComponent<AudioSource>().Play(0);
+                newLvlClicked = true;
+            }
+            star = GameObject.Find("star" + detailsObj.level);
 			StartNewLvl();
 			is_animating = true;
             if (GameObject.Find("TutorialText"))
@@ -99,6 +105,7 @@ public class NextLvl : MonoBehaviour
 
 	void EndAnimation()
 	{
+        newLvlClicked = false;
 		detailsObj.ActivePlanetId = 0;
 		detailsObj.popFromPreviousSystems = detailsObj.universalPopulation;
 		PlanetSpawner planetSpawner = GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>();

@@ -38,8 +38,9 @@ public class IncProd : MonoBehaviour {
 		int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
 		var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
 		if (planet.cryptocoins > planet.productivityGrowthCost)
-		{
-			planet.cryptocoins -= planet.productivityGrowthCost;
+        {
+            gameObject.GetComponent<AudioSource>().Play(0);
+            planet.cryptocoins -= planet.productivityGrowthCost;
 			planet.AddProductivityGrowth();
             if (GameObject.Find("TutorialText"))
             {

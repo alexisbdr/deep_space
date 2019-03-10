@@ -39,8 +39,9 @@ public class GetScience : MonoBehaviour {
 		int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
 		var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
 		if (planet.population > planet.sciencePopCost)
-		{
-			detailsObj.GetComponent<Details>().science += 1;
+        {
+            gameObject.GetComponent<AudioSource>().Play(0);
+            detailsObj.GetComponent<Details>().science += 1;
 			planet.sciencePopCost *= planetData.planetSciencePopCostScale;
 		}
 	}
