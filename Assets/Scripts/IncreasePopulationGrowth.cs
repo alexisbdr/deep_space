@@ -15,7 +15,7 @@ public class IncreasePopulationGrowth : MonoBehaviour {
         //TODO: make listener persistent?
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
         detailsObj = GameObject.Find("DetailsCanvas");
-        _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+        _buttonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
         _buttonClickableColor = Color.white;
     }
 
@@ -23,7 +23,7 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     {
         int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
-        if (detailsObj.GetComponent<Details>().money > planet.autoGrowthCost)
+        if (planet.cryptocoins > planet.autoGrowthCost)
         {
             //make button look clickable
             gameObject.GetComponent<Image>().color = _buttonClickableColor;
@@ -38,10 +38,15 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     {
         int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
-        if (detailsObj.GetComponent<Details>().money > planet.autoGrowthCost)
+        if (planet.cryptocoins > planet.autoGrowthCost)
         {
-            detailsObj.GetComponent<Details>().money -= planet.autoGrowthCost;
+            gameObject.GetComponent<AudioSource>().Play(0);
+            planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
+            if (GameObject.Find("TutorialText"))
+            {
+                GameObject.Find("TutorialText").SendMessage("OnBuyAutoClicked");
+            }
         }
     }
 }

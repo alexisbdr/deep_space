@@ -18,17 +18,35 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="ClickUpgrade.cs" t="Include" />
+          <e p="CloneLoadingAnim.cs" t="Include" />
+          <e p="ClonePanel.cs" t="Include" />
           <e p="ClosePlanetDetails.cs" t="Include" />
           <e p="Details.cs" t="Include" />
           <e p="GameData.cs" t="Include" />
+          <e p="GameUtils.cs" t="Include" />
+          <e p="GetScience.cs" t="Include" />
+          <e p="IncProd.cs" t="Include" />
           <e p="IncreasePopulationGrowth.cs" t="Include" />
+          <e p="InvestScience.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
+          <e p="NextLvl.cs" t="Include" />
           <e p="Planet.cs" t="Include" />
+          <e p="PlanetBadgeClick.cs" t="Include" />
+          <e p="PlanetBadgeProd.cs" t="Include" />
+          <e p="PlanetBadgeScience.cs" t="Include" />
           <e p="PlanetClickAnimation.cs" t="Include" />
+          <e p="PlanetLabel.cs" t="Include" />
           <e p="PlanetSpawner.cs" t="Include" />
+          <e p="QuitGame.cs" t="Include" />
+          <e p="ScienceLoadingAnim.cs" t="Include" />
           <e p="SelectLeftPlanet.cs" t="Include" />
           <e p="SelectRightPlatform.cs" t="Include" />
           <e p="Ship.cs" t="Include" />
           <e p="SpawnPlanet.cs" t="Include" />
+          <e p="StartGame.cs" t="Include" />
+          <e p="Tutorial.cs" t="Include" />
+          <e p="UpgradesManager.cs" t="Include" />
         </e>
       </e>
       <e p="deep_space.sln" t="IncludeFlat" />

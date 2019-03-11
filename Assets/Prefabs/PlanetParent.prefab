@@ -33,7 +33,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4170962722342656}
+  - component: {fileID: 224942246838133212}
   - component: {fileID: 212369413896508496}
   - component: {fileID: 114576759127523430}
   - component: {fileID: 58851915577433178}
@@ -44,19 +44,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4170962722342656
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697306852998228}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4983841135377554}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4983841135377554
 Transform:
   m_ObjectHideFlags: 1
@@ -67,7 +54,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4170962722342656}
+  - {fileID: 224942246838133212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,22 +84,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68a86eb5b47a814dbd2bd3ce7275845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InhabitedPlanetSprite: {fileID: 21300000, guid: 76aee530427395348aa6cf559026c02b,
-    type: 3}
-  InhabitedPlanetSelectedSprite: {fileID: 21300000, guid: af1a028f05ad155449dffef25732a0f6,
-    type: 3}
-  UninhabitedPlanetSprite: {fileID: 21300000, guid: 38beebce9f56db4409270c850c5a558f,
-    type: 3}
-  UninhabitedPlanetSelectedSprite: {fileID: 21300000, guid: 3b505fe6d87bcc848a36179e3feef7cb,
-    type: 3}
+  inhabitedSprites: []
+  uninhabitedSprites: []
   planetName: 
   planetClickAnimation: {fileID: 1291454064072086, guid: 6fa473c2f6a164f84aec412f8ecad7ea,
     type: 2}
-  taxRate: 0
+  scalePlanetHover: 1.4
+  scalePlanetClick: 1.2
+  newPlanetSpawned: 0
+  newPlanetPopThreshold: 0
+  productivity: 0
   popCapacity: 0
   popIncreaseCost: 0
   popGrowthRate: 0.0003
   colonizeMoneyCost: 1000
+  fixedPopGrowth: 0
+  autoGrowthCost: 0
+  productivityGrowthCost: 0
+  cryptocoins: 0
+  sciencePopCost: 0
+  planetLabel: {fileID: 1026696115403214, guid: 11fd84eeda703fa499f455e0568398c4,
+    type: 2}
+  planetBadgeClick: {fileID: 1245627050366714, guid: 1b1ae2aca10a2e646bd1af859374b832,
+    type: 2}
+  planetBadgeProd: {fileID: 1246571861653494, guid: a3a8e4a7e643cd04a9e62cf069e86fa3,
+    type: 2}
+  planetBadgeScience: {fileID: 1211944786097316, guid: e520efab3f94f2e42b766a7b306bb7c7,
+    type: 2}
 --- !u!212 &212369413896508496
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -156,6 +154,24 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &224942246838133212
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697306852998228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4983841135377554}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.64, y: 0.64}
+  m_Pivot: {x: 0.5, y: 0.5}

@@ -8,20 +8,29 @@ public class PlanetSpawner : MonoBehaviour {
 
     public GameObject PlanetParent;
     public Ship ShipPrefab;
+    public GameObject system;
     public int numPlanetsSpawned = 0;
     
     // Use this for initialization
     void Start ()
     {
         CreateNewPlanet(true);
+        system = GameObject.Find("System");
     }
 
     public void CreateNewPlanet(bool starting = false)
     {
-        GameObject planetParent = Instantiate(PlanetParent); 
+        GameObject planetParent = Instantiate(PlanetParent);
+        system = GameObject.Find("System");
+        planetParent.transform.parent = system.transform;
         Planet newPlanet = planetParent.gameObject.GetComponentsInChildren<Planet>()[0];
         InitializePlanetDetails(newPlanet, numPlanetsSpawned, starting);
         numPlanetsSpawned++;
+
+        if (numPlanetsSpawned >= generalData.numPlanetsMax)
+        {
+            GameObject.Find("DetailsCanvas").GetComponent<Details>().RemoveSpawnPlanetUpgrade();
+        }
     }
     
     public void InitializePlanetDetails(Planet newPlanet, int planetID, bool is_first)
@@ -50,11 +59,13 @@ public class PlanetSpawner : MonoBehaviour {
         }
 
         newPlanet.AssignID(planetID);
-        if (!is_first)
+        
+        /*if (!is_first)
         {
             Ship newShip = Instantiate<Ship>(ShipPrefab);
+            newShip.transform.parent = system.transform;
             newShip.InitializeShip(0, planetID, 10);
-        }
+        }*/
 
     }
 

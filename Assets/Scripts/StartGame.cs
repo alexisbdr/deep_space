@@ -17,6 +17,7 @@ public class StartGame : MonoBehaviour {
 
     void OnClickListener()
     {
+        GameObject.Find("StartGameChirp").GetComponent<AudioSource>().Play(0);
         GameObject.Find("MenuCanvas").SetActive(false);
     }
 }

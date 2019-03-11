@@ -6,6 +6,9 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
+using UnityEditor;
+using UnityEngine.Analytics;
+using UnityEngine.EventSystems;
 
 public class Details : MonoBehaviour
 {
@@ -13,11 +16,15 @@ public class Details : MonoBehaviour
     //GUI elements
     Canvas DetailsCanvas;
     GameObject PlanetDetailsPanelObj;
-
+    GameObject ScienceGamblePanel;
+    private GameObject SpawnPlanetUpgrade;
+  
+    public GameObject star;
+    
     public Sprite buttonClickableSprite;
     private Color _buttonClickableColor = Color.white;
     private Color _buttonNotClickableColor;
-
+    
     //player money
     private double _money;
     public double money
@@ -25,17 +32,36 @@ public class Details : MonoBehaviour
         get { return _money; }
         set { _money = value; }
     }
+    
+    // science points
+    public double science = 0;
 
+    // general stats for state of game
+    public double planetSpawnThreshold;
+    public double clickUpgradeCost = 1;
+    public double popClick;
+    public int level = 0;
+    public double universalPopulation;
+    public double popFromPreviousSystems;
+        
     //which planet was clicked most recently
     public int ActivePlanetId;
 
     // Use this for initialization
     void Start()
     {
+        CreateStar();
+        popFromPreviousSystems = 0;
+        popClick = 1;
         PlanetDetailsPanelObj = GameObject.Find("PlanetDetailsPanel");
         PlanetDetailsPanelObj.SetActive(false);
-        money = 0;
+        //ScienceGamblePanel = GameObject.Find("ScienceGamble");
+        //ScienceGamblePanel.SetActive(false);
+        
+        science = 0;
+        planetSpawnThreshold = generalData.planetSpawnThreshold;
         _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+        SpawnPlanetUpgrade = GameObject.Find("SpawnPlanet");
  
         foreach (var button in GameObject.FindGameObjectsWithTag("upgradeButton"))
         {
@@ -51,54 +77,30 @@ public class Details : MonoBehaviour
         if (PlanetDetailsPanelObj.activeSelf)
         {
             Planet planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
-            GameObject.Find("PopValue").GetComponent<Text>().text = Math.Floor(planet.population).ToString();
-            GameObject.Find("ProductivityValue").GetComponent<Text>().text = planet.productivity.ToString();
+            GameObject.Find("PopValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.population);
+            GameObject.Find("ProductivityValue").GetComponent<Text>().text = "+$" + GameUtils.formatLargeNumber(planet.productivity) + "/sec";
             GameObject.Find("PlanetNameText").GetComponent<Text>().text = planet.planetName;
-            GameObject.Find("PopRateValue").GetComponent<Text>().text = planet.fixedPopGrowth.ToString();
+            GameObject.Find("PopRateValue").GetComponent<Text>().text = "+" + GameUtils.formatLargeNumber((planet.fixedPopGrowth*popClick)) + "/sec";
 
-            GameObject.Find("SpawnPlanet").transform.Find("PopCost").GetComponent<Text>().text =
-                planet.newPlanetPopThreshold.ToString();
+            GameObject.Find("MoneyValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.cryptocoins);
 
-            if (planet.population >= planet.newPlanetPopThreshold)
-            {
-                var imageButton = GameObject.Find("SpawnPlanet").transform.Find("PopButton").GetComponent<Image>();
-                imageButton.color = _buttonClickableColor;
-                imageButton.sprite = buttonClickableSprite;
-            }
-            else
-            {
-                var imageButton = GameObject.Find("SpawnPlanet").transform.Find("PopButton").GetComponent<Image>();
-                imageButton.color = _buttonNotClickableColor;
-                imageButton.sprite = null;
-            }
-
-            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = Math.Ceiling(planet.autoGrowthCost).ToString();
+            GameObject.Find("AutoGrowthCost").GetComponent<Text>().text = "$" + GameUtils.formatLargeNumber(planet.autoGrowthCost);
+            GameObject.Find("IncProdCost").GetComponent<Text>().text = "$" + GameUtils.formatLargeNumber(planet.productivityGrowthCost);
+            GameObject.Find("GetScienceCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.sciencePopCost);
+            
         }
+    
+
+
+        GameObject.Find("ScienceVal").GetComponent<Text>().text = GameUtils.formatLargeNumber(science);
+        GameObject.Find("GlobalPopValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(universalPopulation);
         
-           
-   
-        //Productivity mechanics
-        double globalProductivityRate = 0;
-        double popSum = 0;
-        double popGrowthSum = 0; 
-        foreach (var planet in FindObjectsOfType<Planet>())
+        if (GameObject.Find("PopCost"))
         {
-            popSum += planet.population;
-            globalProductivityRate += planet.population * planet.productivity;
-            popGrowthSum += planet.fixedPopGrowth;
-        }
-        money += Time.deltaTime * globalProductivityRate;
-        if (globalProductivityRate < 1)
-        {
-            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money * 100) / 100).ToString();
-        } else
-        {
-            GameObject.Find("MoneyValue").GetComponent<Text>().text = (Math.Floor(money)).ToString();
+            GameObject.Find("PopCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planetSpawnThreshold);
         }
 
-        GameObject.Find("GlobalPopValue").GetComponent<Text>().text = Math.Floor(popSum).ToString();
-        GameObject.Find("MoneyRateValue").GetComponent<Text>().text = globalProductivityRate.ToString("F2");
-        GameObject.Find("GlobalPopRateValue").GetComponent<Text>().text = Math.Floor(popGrowthSum).ToString();
+        GameObject.Find("ClickUpgradeCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(clickUpgradeCost);
 
     }
 
@@ -142,7 +144,27 @@ public class Details : MonoBehaviour
 
     public void PlanetClicked(int id)
     {
-      GameObject.Find("planet" + id.ToString()).GetComponent<Planet>().population += planetData.popClick;
+        GameObject.Find("planet" + id.ToString()).GetComponent<Planet>().population += popClick;
+        universalPopulation += popClick;
     }
 
+    public void CreateStar()
+    {
+        level++;
+        GameObject currStar = Instantiate(star);
+        currStar.name = "star" + level;
+    }
+
+    public void RemoveSpawnPlanetUpgrade()
+    {
+        if (SpawnPlanetUpgrade.activeSelf)
+        {
+            SpawnPlanetUpgrade.SetActive(false);
+        }
+    }
+
+    public void ActivateSpawnPlanetUpgrade()
+    {
+        SpawnPlanetUpgrade.SetActive(true);
+    }
 }
