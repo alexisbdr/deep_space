@@ -9,6 +9,9 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     Color _buttonNotClickableColor;
     Color _buttonClickableColor;
 
+    public GameObject clickIcon;
+    private GameObject _clickIcon; 
+
     // Use this for initialization
     void Start ()
     {
@@ -42,6 +45,11 @@ public class IncreasePopulationGrowth : MonoBehaviour {
         {
             planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
+
+            //Initialize flying icon
+            _clickIcon = clickIcon;
+            _clickIcon = Instantiate(_clickIcon);
+            _clickIcon.transform.parent = gameObject.transform;
         }
     }
 }

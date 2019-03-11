@@ -1570,6 +1570,34 @@ Prefab:
       propertyPath: m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224290435306636378, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 224639261276872306, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114828985073165796, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae,
+        type: 2}
+      propertyPath: clickIcon
+      value: 
+      objectReference: {fileID: 1691198914017804, guid: 4ae8893b775007142b97a34a0e6d9abe,
+        type: 2}
+    - target: {fileID: 212030209636672482, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f665ef2dfbbedc43b2d118fe6655f37,
+        type: 3}
+    - target: {fileID: 212840190203104582, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f665ef2dfbbedc43b2d118fe6655f37,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c1d8ae0a65b0ae418302ba31d8a7dae, type: 2}
   m_IsPrefabAsset: 0

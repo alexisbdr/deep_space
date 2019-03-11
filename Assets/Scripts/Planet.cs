@@ -212,8 +212,8 @@ public class Planet : MonoBehaviour {
                       Time.fixedDeltaTime +
                       fixedPopGrowth * Time.deltaTime * DetailsCanvas.GetComponent<Details>().popClick;
         
-        //Updating population
-        cryptocoins += productivity * Time.deltaTime;
+        //Re-Formulation of exponential growth as log-linear 
+        cryptocoins += productivity * population * .001;
     }
 
     //Hovering behavior
