@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Ship.cs" />
     <Compile Include="Assets\Scripts\SpawnPlanet.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
+    <Compile Include="Assets\Scripts\Tutorial.cs" />
     <Compile Include="Assets\Scripts\UpgradesManager.cs" />
     <None Include="Assets\Font\Raleway\OFL.txt" />
     <Reference Include="UnityEditor.StandardEvents">

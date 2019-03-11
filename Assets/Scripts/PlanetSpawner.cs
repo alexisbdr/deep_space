@@ -59,12 +59,13 @@ public class PlanetSpawner : MonoBehaviour {
         }
 
         newPlanet.AssignID(planetID);
-        if (!is_first)
+        
+        /*if (!is_first)
         {
             Ship newShip = Instantiate<Ship>(ShipPrefab);
             newShip.transform.parent = system.transform;
             newShip.InitializeShip(0, planetID, 10);
-        }
+        }*/
 
     }
 

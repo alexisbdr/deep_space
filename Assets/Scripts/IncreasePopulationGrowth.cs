@@ -15,7 +15,7 @@ public class IncreasePopulationGrowth : MonoBehaviour {
         //TODO: make listener persistent?
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
         detailsObj = GameObject.Find("DetailsCanvas");
-        _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+        _buttonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
         _buttonClickableColor = Color.white;
     }
 

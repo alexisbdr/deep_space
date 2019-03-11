@@ -85,5 +85,6 @@ public class Tutorial : MonoBehaviour {
     {
         stage = 9;
         gameObject.GetComponent<Text>().text = "";
+        transform.Find("speech").gameObject.SetActive(false);
     }
 }

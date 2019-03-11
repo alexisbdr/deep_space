@@ -33,13 +33,13 @@ public class NextLvl : MonoBehaviour
 	{
 		gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
 		detailsObj = GameObject.Find("DetailsCanvas").GetComponent<Details>();
-		_buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+		_buttonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
 		_buttonClickableColor = new Color(1f, 0.8431373f, 0f);
 		star = GameObject.Find("star" + detailsObj.level);
 		planetSpawner = GameObject.Find("PlanetSpawner").GetComponent<PlanetSpawner>();
 		investScience = GameObject.Find("InvestScience");
 		clonePanel = GameObject.Find("ClonePanel");
-		investScience.SetActive(false);
+		investScience.SetActive(false);investScience.SetActive(false);
 		clonePanel.SetActive(false);
 	}
 

@@ -137,8 +137,8 @@ public class Planet : MonoBehaviour {
         lineRenderer.positionCount = numSegments+1;
         lineRenderer.widthMultiplier = 0.02f;
         lineRenderer.sortingOrder = -1;
-        lineRenderer.startColor = new Color(1, 1, 1);
-        lineRenderer.endColor = new Color(1, 1, 1);
+        lineRenderer.startColor = new Color(1, 1, 1, 0.1f);
+        lineRenderer.endColor = new Color(1, 1, 1, 0.1f);
         defaultMaterial = Resources.Load<Material>("Materials/defaultMaterial");
         lineRenderer.material = new Material(defaultMaterial);
         

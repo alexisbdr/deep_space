@@ -65,7 +65,7 @@ public class ClonePanel : MonoBehaviour
 		cloneButton = GameObject.Find("CloneButton");
 		cloneButton.GetComponent<Button>().onClick.AddListener(cloneButtonClicked);
 		
-		_cloneButtonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+		_cloneButtonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
 		_cloneButtonClickableColor = Color.white;
 		cloningPossibleBasedOnPop = true;
 	}
@@ -154,7 +154,7 @@ public class ClonePanel : MonoBehaviour
 		detailsObj.popFromPreviousSystems -= popTaken;
 		detailsObj.universalPopulation -= popTaken;
 
-		popReceived = Random.Range(0, (float) (20 * riskFactor * popTaken) + 1);
+		popReceived = Random.Range(0, (float) (2 * popTaken) + 1);
 		
 		cloneResultText.text = "Cloning " + GameUtils.formatLargeNumber(popTaken) + " Population...";
 	}

@@ -45,6 +45,7 @@
           <e p="Ship.cs" t="Include" />
           <e p="SpawnPlanet.cs" t="Include" />
           <e p="StartGame.cs" t="Include" />
+          <e p="Tutorial.cs" t="Include" />
           <e p="UpgradesManager.cs" t="Include" />
         </e>
       </e>

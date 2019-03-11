@@ -42,7 +42,7 @@ public class InvestScience : MonoBehaviour
 		investButton = GameObject.Find("InvestButton");
 		investButton.GetComponent<Button>().onClick.AddListener(InvestButtonClicked);
 		
-		_buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+		_buttonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
 		_buttonClickableColor = Color.white;
 		
 	}
@@ -98,10 +98,10 @@ public class InvestScience : MonoBehaviour
 		loadingIcon2.SetActive(false);
 		loadingIcon3.SetActive(false);
 		
-		int scienceReceived = Random.Range((int) detailsObj.science, (int) (3 * detailsObj.science + 1));
+		int scienceReceived = Random.Range((int) detailsObj.science, (int) (2 * detailsObj.science + 1));
 		detailsObj.science += scienceReceived;
 
-		investResultText.text = "You gained " + scienceReceived + " science!";
+		investResultText.text = "You gained " + GameUtils.formatLargeNumber(scienceReceived) + " science!";
 	}
 
 	void UpdateLoadingAnimation()

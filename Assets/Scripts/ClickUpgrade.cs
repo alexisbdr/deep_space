@@ -13,7 +13,7 @@ public class ClickUpgrade : MonoBehaviour {
     void Start () {
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
         detailsObj = GameObject.Find("DetailsCanvas").GetComponent<Details>();
-        _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+        _buttonNotClickableColor = new Color(1f, 1f, 1f, 0.1f);
         _buttonClickableColor = new Color(1f, 0.8431373f, 0f);
     }
 
