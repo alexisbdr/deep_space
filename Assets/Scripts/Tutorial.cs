@@ -50,7 +50,7 @@ public class Tutorial : MonoBehaviour {
         if (stage == 0)
         {
             stage = 1;
-            gameObject.GetComponent<Text>().text = "Good! Clicking on a planet increases its population. Now click on the Increase Productivity button.";
+            gameObject.GetComponent<Text>().text = "Good! Clicking on a planet increases its population. Now click on the Productivity button.";
         }
     }
 
@@ -59,7 +59,7 @@ public class Tutorial : MonoBehaviour {
         if (stage == 1)
         {
             stage = 2;
-            gameObject.GetComponent<Text>().text = "Productivity is the rate at which population generates cryptocoins for a planet. Cryptocoins are used to improve your planets. Spend some cryptocoin by clicking the Buy Autoclicker button.";
+            gameObject.GetComponent<Text>().text = "Productivity is the rate at which a planet generates cryptocoins. Spend some cryptocoins by clicking the Autoclicker button.";
         }
     }
 
