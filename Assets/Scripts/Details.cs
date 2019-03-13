@@ -43,7 +43,7 @@ public class Details : MonoBehaviour
     public int level = 0;
     public double universalPopulation;
     public double popFromPreviousSystems;
-        
+     
     //which planet was clicked most recently
     public int ActivePlanetId;
 

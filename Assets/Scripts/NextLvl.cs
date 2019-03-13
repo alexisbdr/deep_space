@@ -128,7 +128,7 @@ public class NextLvl : MonoBehaviour
 		}
 
 		// change upgrade to level 3 for future versions of game
-		if (detailsObj.level == 2)
+		if (detailsObj.level == 3)
 		{
 			clonePanel.SetActive(true);
 		}
