@@ -138,7 +138,10 @@ public class NextLvl : MonoBehaviour
 			clonePanel.GetComponent<ClonePanel>().cloningPossibleBasedOnPop = true;
 			GameObject.Find("CloneResult").GetComponent<Text>().text = "Try cloning your people!";
 		}
-	}
+
+	    //Science Scaling for next level 
+	    GameObject.Find("GetScienceButton").GetComponent<GetScience>().sciencePoints *= planetData.getScienceLvlScale;
+    }
 
 	void AnimateStar()
 	{

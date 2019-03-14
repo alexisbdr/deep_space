@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AutoClickIcon.cs" />
+     <Compile Include="Assets\Scripts\ClickIconSpawner.cs" />
      <Compile Include="Assets\Scripts\ClickUpgrade.cs" />
      <Compile Include="Assets\Scripts\CloneLoadingAnim.cs" />
      <Compile Include="Assets\Scripts\ClonePanel.cs" />
@@ -73,7 +75,9 @@
      <Compile Include="Assets\Scripts\PlanetClickAnimation.cs" />
      <Compile Include="Assets\Scripts\PlanetLabel.cs" />
      <Compile Include="Assets\Scripts\PlanetSpawner.cs" />
+     <Compile Include="Assets\Scripts\ProdClickIcon.cs" />
      <Compile Include="Assets\Scripts\QuitGame.cs" />
+     <Compile Include="Assets\Scripts\ScienceClickIcon.cs" />
      <Compile Include="Assets\Scripts\ScienceLoadingAnim.cs" />
      <Compile Include="Assets\Scripts\SelectLeftPlanet.cs" />
      <Compile Include="Assets\Scripts\SelectRightPlatform.cs" />

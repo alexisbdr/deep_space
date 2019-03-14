@@ -59,6 +59,7 @@ public static class GameUtils {
             num /= 1000;
             modifier = "Sp";
         }
+
         if (num.ToString().Length > 4)
         {
             if (num.ToString().Substring(3,1) == ".")
@@ -67,6 +68,7 @@ public static class GameUtils {
             }
             return num.ToString().Substring(0,4) + modifier;
         }
+
         return num.ToString() + modifier;
     }
 }

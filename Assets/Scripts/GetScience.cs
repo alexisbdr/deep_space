@@ -9,6 +9,12 @@ public class GetScience : MonoBehaviour {
 	Color _buttonNotClickableColor;
 	Color _buttonClickableColor;
 
+    private int _sciencePoints = 1;
+    public int sciencePoints
+    {
+        get { return _sciencePoints; }
+        set { _sciencePoints = value; }
+    }
 	// Use this for initialization
 	void Start ()
 	{
@@ -41,7 +47,7 @@ public class GetScience : MonoBehaviour {
 		if (planet.population > planet.sciencePopCost)
         {
             gameObject.GetComponent<AudioSource>().Play(0);
-            detailsObj.GetComponent<Details>().science += 1;
+            detailsObj.GetComponent<Details>().science += sciencePoints;
 			planet.sciencePopCost *= planetData.planetSciencePopCostScale;
 		}
 	}

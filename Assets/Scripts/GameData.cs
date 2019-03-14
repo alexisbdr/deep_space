@@ -71,6 +71,8 @@ public class planetData
     public const double colonizePopCost = 100;
     //Scale by which the colonization cost ncreases
     public const double colonizeMoneyCostScale = 1.1;
+    //Science scaling at each level
+    public const int getScienceLvlScale = 5; 
 
 
 

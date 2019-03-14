@@ -61,8 +61,9 @@ public class Details : MonoBehaviour
         science = 0;
         planetSpawnThreshold = generalData.planetSpawnThreshold;
         _buttonNotClickableColor = new Color(0f, 0f, 0f, 0.1f);
+
         SpawnPlanetUpgrade = GameObject.Find("SpawnPlanet");
- 
+
         foreach (var button in GameObject.FindGameObjectsWithTag("upgradeButton"))
         {
             var image = button.gameObject.GetComponent<Image>();
@@ -89,8 +90,6 @@ public class Details : MonoBehaviour
             GameObject.Find("GetScienceCost").GetComponent<Text>().text = GameUtils.formatLargeNumber(planet.sciencePopCost);
             
         }
-    
-
 
         GameObject.Find("ScienceVal").GetComponent<Text>().text = GameUtils.formatLargeNumber(science);
         GameObject.Find("GlobalPopValue").GetComponent<Text>().text = GameUtils.formatLargeNumber(universalPopulation);

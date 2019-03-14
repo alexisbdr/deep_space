@@ -9,8 +9,9 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     Color _buttonNotClickableColor;
     Color _buttonClickableColor;
 
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start ()
     {
         //TODO: make listener persistent?
         gameObject.GetComponent<Button>().onClick.AddListener(OnClickListener);
@@ -38,9 +39,11 @@ public class IncreasePopulationGrowth : MonoBehaviour {
     {
         int ActivePlanetId = detailsObj.GetComponent<Details>().ActivePlanetId;
         var planet = GameObject.Find("planet" + ActivePlanetId.ToString()).GetComponent<Planet>();
+        ClickIconSpawner iconSpawner = GameObject.Find("ClickIconSpawner").GetComponent<ClickIconSpawner>();
         if (planet.cryptocoins > planet.autoGrowthCost)
         {
             gameObject.GetComponent<AudioSource>().Play(0);
+            iconSpawner.CreateIcon(gameObject);
             planet.cryptocoins -= planet.autoGrowthCost;
             planet.AddPopulationGrowth();
             if (GameObject.Find("TutorialText"))
