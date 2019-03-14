@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4703638023268962}
   - component: {fileID: 212231697857812140}
+  - component: {fileID: 114577108973303886}
   m_Layer: 0
   m_Name: scienceIconPrefab
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114577108973303886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696030992280416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8cda3a656702e43b1656abba8f162d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212231697857812140
 SpriteRenderer:
   m_ObjectHideFlags: 1
